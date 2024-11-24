@@ -1,4 +1,4 @@
-﻿namespace NotBook_Notes
+﻿namespace NotBook_Notes.Views
 {
     public partial class AppShell : Shell
     {

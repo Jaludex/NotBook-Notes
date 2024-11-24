@@ -6,7 +6,10 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            //Posible inicio de sesion en la ventana que dejaste la ultima vez
+            //MainPage = new AppShell();
+
+            Current!.MainPage = new Views.AppShell();
         }
     }
 }
