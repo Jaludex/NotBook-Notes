@@ -13,6 +13,9 @@ namespace NotBook_Notes
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("Rubik-Light.ttf", "RubikLight");
+                    fonts.AddFont("Rubik-Regular.ttf", "RubikRegular");
+                    fonts.AddFont("Rubik-Medium.ttf", "RubikMedium");
                 });
 
 #if DEBUG
