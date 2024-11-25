@@ -9,14 +9,19 @@
                    Margin="5,0,5,0"/>
 
         <Button 
-            Text="+ Nueva Nota"
+            Text="Nueva Nota..."
+            ImageSource="agregar.svg"
+            HeightRequest="50"
             TextColor="Gray"
             VerticalOptions="Center"
-            HorizontalOptions="Center"
-            WidthRequest="300"
+            HorizontalOptions="FillAndExpand"
             BackgroundColor="Transparent"
             BorderWidth="1"
             BorderColor="{DynamicResource PrimaryDark}"
-            Margin="0,20,0,0"/>
+            Margin="30,20"
+            ContentLayout="Right, 20"/>
+
+
+
     </VerticalStackLayout>
 </ContentPage>
