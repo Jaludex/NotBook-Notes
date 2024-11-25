@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace NotBook_Notes
+namespace NotBook_Notes.Platforms.Android
 {
     [Application]
     public class MainApplication : MauiApplication

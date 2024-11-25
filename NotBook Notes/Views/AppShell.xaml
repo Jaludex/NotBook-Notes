@@ -7,10 +7,34 @@
     Shell.FlyoutBehavior="Flyout"
     Title="NotBook_Notes">
 
+    <Shell.FlyoutHeader>
+        <StackLayout>
+            <Label Text="Logo" 
+                   FontSize="20" 
+                   HorizontalOptions="Center"
+                   Margin="0,50,0,50"/>
+            <Label Text="NotBook Notes"
+                   FontSize="20"
+                   HorizontalOptions="Center"/>
+            <Label Text="Plasma tus sueños... Y fechas; sabemos que eres olvidadizo"
+                   FontSize="11"
+                   HorizontalOptions="Center"
+                   Padding="10"
+                   Margin="0,0,0,20"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+   
+
     <ShellContent
         Title="Notas"
         ContentTemplate="{DataTemplate local:PaginaNotas}"
         Route="PaginaNotas"
-        Icon="bombilla"/>
+        Icon="bombilla"
+        />
 
+    <Shell.FlyoutFooter>
+        <Label Text="Profe denos el 20"
+               HorizontalOptions="Center"
+               FontSize="12"/>
+    </Shell.FlyoutFooter>
 </Shell>
