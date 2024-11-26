@@ -6,4 +6,9 @@ public partial class PaginaNotas : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void BtnNuevaNota_Clicked(object sender, EventArgs e)
+    {
+		await AppShell.Current.GoToAsync(nameof(VerNotas));
+    }
 }

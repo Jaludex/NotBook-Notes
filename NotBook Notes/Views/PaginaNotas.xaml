@@ -38,7 +38,8 @@
             TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
             HorizontalOptions="FillAndExpand"
             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
-            Margin="30,20"/>
+            Margin="30,20"
+            Clicked="BtnNuevaNota_Clicked"/>
             
          
 
