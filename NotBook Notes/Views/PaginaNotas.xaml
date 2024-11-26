@@ -6,18 +6,28 @@
              Title="Notas">
 
         <VerticalStackLayout>
-        <SearchBar Placeholder="Frase bonita random..." 
-                   Margin="5,0,5,0"/>
+
+        <Frame
+                BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray100}}"
+                BorderColor="Transparent"
+                CornerRadius="100"
+                Padding="5"
+                Margin="10"
+            >
+            <SearchBar Placeholder="Frase bonita random..." 
+           Margin="5,0,5,0"/>
+        </Frame>
 
         <Button 
-            Text="Nueva Nota..."
+            Text="+ Nueva Nota"
             HeightRequest="60"
-            FontSize="17"
-            TextColor="{DynamicResource PrimaryDark}"
+            FontSize="20"
+            FontAttributes="Bold"
+            TextColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={DynamicResource PrimaryDark}}"
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="Transparent"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource OffLightBlack}}"
             BorderWidth="2"
-            BorderColor="{DynamicResource PrimaryDark}"
+            BorderColor="{AppThemeBinding Light={StaticResource SecondaryDarkText}, Dark={DynamicResource PrimaryDark}}"
             Margin="30,20"/>
 
     </VerticalStackLayout>
