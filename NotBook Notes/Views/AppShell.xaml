@@ -6,6 +6,8 @@
     xmlns:local="clr-namespace:NotBook_Notes.Views"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     Shell.FlyoutBehavior="Flyout"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+    Shell.TitleColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
     Title="NotBook_Notes">
 
     <Shell.FlyoutHeader>
@@ -30,6 +32,16 @@
     <FlyoutItem Title="Notas" Icon="bombilla.svg">
         <ShellContent ContentTemplate="{DataTemplate local:PaginaNotas}" 
                       Route="PaginaNotas"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Recordatorios" Icon="campana.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:PaginaRecordatorios}" 
+                  Route="PaginaRecordatorios"/>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Calendario" Icon="calendario.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:PaginaCalendario}" 
+              Route="PaginaCalenadario"/>
     </FlyoutItem>
 
     <Shell.FlyoutFooter>

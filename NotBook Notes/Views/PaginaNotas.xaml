@@ -8,14 +8,26 @@
         <VerticalStackLayout>
 
         <Frame
-                BackgroundColor="{AppThemeBinding Dark={StaticResource Gray600}, Light={StaticResource Gray100}}"
-                BorderColor="Transparent"
-                CornerRadius="100"
-                Padding="5"
-                Margin="10"
-            >
-            <SearchBar Placeholder="Frase bonita random..." 
-           Margin="5,0,5,0"/>
+        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
+        BorderColor="Transparent"
+        Margin="10"
+        Padding="10,5"
+        CornerRadius="25"
+        >
+            <HorizontalStackLayout>
+                <Image Source="lupa.svg"
+                       HeightRequest="30"
+                       Margin="0,0,10,0"/>
+
+
+
+                <Entry
+                Placeholder="Frase Bonita aleatoria..."
+                FontAttributes="Bold"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center"/>
+
+            </HorizontalStackLayout>
         </Frame>
 
         <Button 
@@ -23,12 +35,21 @@
             HeightRequest="60"
             FontSize="20"
             FontAttributes="Bold"
-            TextColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={DynamicResource PrimaryDark}}"
+            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
             HorizontalOptions="FillAndExpand"
-            BackgroundColor="{AppThemeBinding Light={StaticResource Gray50}, Dark={StaticResource OffLightBlack}}"
-            BorderWidth="2"
-            BorderColor="{AppThemeBinding Light={StaticResource SecondaryDarkText}, Dark={DynamicResource PrimaryDark}}"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
             Margin="30,20"/>
+
+        <ImageButton Source="ordenar.svg"
+                     HeightRequest="40"
+                     WidthRequest="40"
+                     Padding="5"
+                     CornerRadius="50"
+                     HorizontalOptions="End"
+                     Margin="0,0,30,0"
+                     />
+        <Label Text="Aqui iran las notas"
+               HorizontalOptions="Center"/>
 
     </VerticalStackLayout>
 </ContentPage>

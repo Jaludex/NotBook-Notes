@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotBook_Notes.Views.PaginaRecordatorios"
+             Title="Recordatorios">
+    <VerticalStackLayout>
+
+        <Frame
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
+                BorderColor="Transparent"
+                Margin="10"
+                Padding="10,5"
+                CornerRadius="25"
+                >
+            <HorizontalStackLayout>
+            <Image Source="lupa.svg"
+                   HeightRequest="30"
+                   Margin="0,0,10,0"/>
+                    
+
+
+            <Entry
+            Placeholder="Frase Bonita aleatoria..."
+            FontAttributes="Bold"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"/>
+
+            </HorizontalStackLayout>
+        </Frame>
+
+
+        <Button 
+        Text="+ Nuevo Recordatorios"
+        HeightRequest="60"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
+        HorizontalOptions="FillAndExpand"
+        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
+        Margin="30,20"/>
+
+        <ImageButton Source="ordenar.svg"
+                 HeightRequest="40"
+                 WidthRequest="40"
+                 Padding="5"
+                 CornerRadius="50"
+                 HorizontalOptions="End"
+                 Margin="0,0,30,0"
+                 />
+        <Label Text="Aqui iran los recordatorios"
+           HorizontalOptions="Center"/>
+
+    </VerticalStackLayout>
+</ContentPage>

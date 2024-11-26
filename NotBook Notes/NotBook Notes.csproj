@@ -64,19 +64,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\PaginaRecordatorios.xaml.cs">
-	    <DependentUpon>PaginaRecordatorios.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\PaginaNotas.xaml.cs">
 	    <DependentUpon>PaginaNotas.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\PaginaRecordatorios.xaml">
+	  <MauiXaml Update="Views\PaginaCalendario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PaginaNotas.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\PaginaRecordatorios.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
