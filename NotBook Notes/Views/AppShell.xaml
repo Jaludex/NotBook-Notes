@@ -32,6 +32,11 @@
                       Route="PaginaNotas"/>
     </FlyoutItem>
 
+    <FlyoutItem Title="Agregar Nota" Icon="bombilla.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:VerNotas}" 
+                   Route="VerNotas"/>
+    </FlyoutItem>
+
     <Shell.FlyoutFooter>
         <Label Text="Profe denos el 20"
                HorizontalOptions="Center"

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotBook_Notes.Views.VerNotas"
+             Title="Crear Nota">
+    <VerticalStackLayout Margin="20">
+
+        <Editor x:Name="TextEditor"
+        Placeholder="Escribe tu nota aquí..."
+        HeightRequest="70" />
+
+        <Grid ColumnDefinitions="*,auto,auto" ColumnSpacing="4">
+            <Button Text="Guardar" Grid.Column="1"/>
+            <!--Clicked="SaveButton_Clicked"-->
+        </Grid>
+
+        <CollectionView ItemsSource="{Binding Notas}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BorderColor="Gray" CornerRadius="5">
+                        <StackLayout>
+                            <Label Text="{Binding Titulo}" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="{Binding Contenido}" FontSize="14" />
+                            <Label Text="{Binding Fecha, StringFormat='{0:dd MMM yyyy}'}" FontSize="12" TextColor="Gray" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

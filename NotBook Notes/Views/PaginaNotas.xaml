@@ -29,6 +29,8 @@
             BorderWidth="2"
             BorderColor="{AppThemeBinding Light={StaticResource SecondaryDarkText}, Dark={DynamicResource PrimaryDark}}"
             Margin="30,20"/>
+            
+         
 
     </VerticalStackLayout>
 </ContentPage>
