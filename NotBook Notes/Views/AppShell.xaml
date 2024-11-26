@@ -12,10 +12,9 @@
 
     <Shell.FlyoutHeader>
         <StackLayout>
-            <Label Text="Logo" 
-                   FontSize="20" 
-                   HorizontalOptions="Center"
-                   Margin="0,50,0,50"/>
+            <Image Source="libreta.svg"
+                   HeightRequest="150"
+                />
             <Label Text="NotBook Notes"
                    FontSize="20"
                    HorizontalOptions="Center"/>
