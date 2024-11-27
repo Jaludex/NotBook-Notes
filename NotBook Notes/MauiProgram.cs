@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using NotBook_Notes.Models;
 
 namespace NotBook_Notes
 {
@@ -21,10 +22,12 @@ namespace NotBook_Notes
                     fonts.AddFont("Rubik-Regular.ttf", "RubikRegular");
                     fonts.AddFont("Rubik-Medium.ttf", "RubikMedium");
                 });
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+            //Tamporal, solo para crear algo donde trabajar
+            ManejoDeDatos.categorias = new List<Categoria>();
+
 
             return builder.Build();
         }

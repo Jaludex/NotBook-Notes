@@ -9,6 +9,9 @@ public partial class PaginaNotas : ContentPage
 
     private async void BtnNuevaNota_Clicked(object sender, EventArgs e)
     {
-		await AppShell.Current.GoToAsync(nameof(VerNotas));
+        bool esRecordatorio = true;
+        var verNotasPage = new VerNotas(esRecordatorio);
+
+        await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
     }
 }

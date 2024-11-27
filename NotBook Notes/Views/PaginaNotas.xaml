@@ -51,6 +51,8 @@
                      HorizontalOptions="End"
                      Margin="0,0,30,0"
                      />
+            
+        
         <Label Text="Aqui iran las notas"
                HorizontalOptions="Center"/>
 

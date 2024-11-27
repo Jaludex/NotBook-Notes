@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    public class Nota
+    internal class Nota
     {
-        public string Titulo { get; set; }
-        public string Contenido { get; set; }
-        public DateTime FechaCreación { get; set; }
+        public string titulo { get; set; }
+        public string contenido { get; set; }
+        public DateTime fechaCreacion { get; set; }
 
-        public Nota() { }
+        public Nota(string Titulo, string Contentido, DateTime FechaCreacion) 
+        {
+            this.titulo = Titulo;
+            this.contenido = Contentido;
+            this.fechaCreacion = FechaCreacion;
+        }
     }
 }

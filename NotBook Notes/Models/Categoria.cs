@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    public class Categoria
+    internal class Categoria
     {
         public List<Nota> notas { get; set; }
-        public String NombreCategoría { get; set; }
-        public Color ColorNotas { get; set; }
+        public String nombreCategoría { get; set; }
+        public Color colorNotas { get; set; }
 
-        public Categoria() { }
+        public Categoria(string Nombre, Color ColorNotas) 
+        {
+            notas = new List<Nota>();
+            this.colorNotas = ColorNotas;
+            this.nombreCategoría = Nombre;
+        }
     }
 }

@@ -21,6 +21,23 @@
                        MaxLength="30"
                        TextChanged="TituloEditor_TextChanged"/>
 
+
+                <HorizontalStackLayout>
+                    <Label x:Name="LabelFechaLimite"
+                               Text="Fecha Limite: Por Definir..."
+                               IsVisible="False"
+                               HorizontalOptions="Start">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>
+
+                    </Label>
+                    <DatePicker x:Name="FechaLimite"
+                                IsVisible="False"
+                                HorizontalOptions="End"
+                                DateSelected="FechaLimite_DateSelected"/>
+                </HorizontalStackLayout>
+
                 <StackLayout Padding="5">
                     
                     <Editor x:Name="TxtNota"
