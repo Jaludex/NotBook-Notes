@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    internal class Nota
+    public class Nota
     {
         public string titulo { get; set; }
         public string contenido { get; set; }

@@ -12,6 +12,7 @@ public partial class VerNotas : ContentPage
     public VerNotas(bool esRecordatorio)
 	{
 		InitializeComponent();
+		LabelFechaCreacion.Text = DateTime.Now.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
 		this.esRecordatorio = esRecordatorio;
 		CambiarContexto();
 	}
@@ -20,8 +21,7 @@ public partial class VerNotas : ContentPage
 	{
 		if (esRecordatorio) 
 		{
-            FechaLimite.IsEnabled = true;
-			LabelFechaLimite.IsVisible = true;
+            FrameRecordatorio.IsVisible = true;
         }
 
 		//Aqui se implementa el decir Ver Nota o Crear Nota Acorde al contexto
@@ -45,7 +45,7 @@ public partial class VerNotas : ContentPage
     private void FechaLimite_DateSelected(object sender, DateChangedEventArgs e)
     {
 		fechaLimite = e.NewDate;
-		if (fechaLimite >= DateTime.Today)
+		if (fechaLimite <= DateTime.Today)
 		{
 			IToast error = Toast.Make("Introduzca una Fecha Valida para Recordatorios");
 			error.Show();

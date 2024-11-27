@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    internal class Categoria
+    public class Categoria
     {
         public List<Nota> notas { get; set; }
         public String nombreCategoría { get; set; }

@@ -21,22 +21,34 @@
                        MaxLength="30"
                        TextChanged="TituloEditor_TextChanged"/>
 
+                <Label x:Name="LabelFechaCreacion"
+                       Text="Fecha de Creacion: "
+                       Margin="20,10,0,0"/>
 
-                <HorizontalStackLayout>
-                    <Label x:Name="LabelFechaLimite"
-                               Text="Fecha Limite: Por Definir..."
-                               IsVisible="False"
-                               HorizontalOptions="Start">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                        </Label.GestureRecognizers>
+                <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}"
+                       Margin="10"
+                       Padding="10"
+                       BorderColor="Transparent"
+                       CornerRadius="20"
+                       IsVisible="False"
+                       x:Name="FrameRecordatorio">
 
-                    </Label>
-                    <DatePicker x:Name="FechaLimite"
-                                IsVisible="False"
-                                HorizontalOptions="End"
-                                DateSelected="FechaLimite_DateSelected"/>
-                </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label x:Name="LabelFechaLimite"
+                                Text="Fecha Limite: Por Definir..."
+                                HorizontalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <DatePicker x:Name="FechaLimite"
+                                    HorizontalOptions="End"
+                                    DateSelected="FechaLimite_DateSelected"
+                                    />
+
+                    </HorizontalStackLayout>
+                </Frame>
 
                 <StackLayout Padding="5">
                     

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    internal static class ManejoDeDatos
+    public static class ManejoDeDatos
     {
         public static List<Categoria> categorias;
 

@@ -6,4 +6,12 @@ public partial class PaginaRecordatorios : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void BtnNuevoRecordatorio_Clicked(object sender, EventArgs e)
+    {
+        bool esRecordatorio = true;
+        var verNotasPage = new VerNotas(esRecordatorio);
+
+        await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
+    }
 }

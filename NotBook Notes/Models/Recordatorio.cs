@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NotBook_Notes.Models
 {
-    internal class Recordatorio : Nota
+    public class Recordatorio : Nota
     {
         public DateTime fechaLimite { get; set; }
 
