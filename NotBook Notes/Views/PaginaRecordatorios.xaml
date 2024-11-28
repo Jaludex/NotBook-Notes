@@ -31,7 +31,7 @@
 
         <Button 
         x:Name="BtnNuevoRecordatorio"
-        Text="+ Nuevo Recordatorios"
+        Text="+ Nuevo Recordatorio"
         HeightRequest="60"
         FontSize="20"
         FontAttributes="Bold"

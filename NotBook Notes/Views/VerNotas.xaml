@@ -12,55 +12,85 @@
 
         <ScrollView Grid.Row="0">
             <VerticalStackLayout Margin="0">
+                
+                
                 <Entry x:Name="TituloEditor"
                        FontSize="25"
                        HeightRequest="50"
                        HorizontalOptions="FillAndExpand"
                        HorizontalTextAlignment="Center"
                        Placeholder="Un Titulo Interesante"
-                       MaxLength="30"
-                       TextChanged="TituloEditor_TextChanged"/>
+                       MaxLength="30"/>
+                
+                
 
                 <Label x:Name="LabelFechaCreacion"
                        Text="Fecha de Creacion: "
                        Margin="20,10,0,0"/>
 
                 <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}"
-                       Margin="10"
+                       Margin="10, 10, 10, 0"
                        Padding="10"
                        BorderColor="Transparent"
                        CornerRadius="20"
                        IsVisible="False"
                        x:Name="FrameRecordatorio">
 
-                    <HorizontalStackLayout>
-                        <Label x:Name="LabelFechaLimite"
-                                Text="Fecha Limite: Por Definir..."
-                                HorizontalOptions="Start">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                    <HorizontalStackLayout HorizontalOptions="Fill" HeightRequest="40">
 
-                        <DatePicker x:Name="FechaLimite"
-                                    HorizontalOptions="End"
-                                    DateSelected="FechaLimite_DateSelected"
-                                    />
+
+                        <!-- Botón de imagen a la derecha -->
+                        <ImageButton Source="calendario.svg" 
+                                        Clicked="DateTimePicker_Clicked" 
+                                        Margin="0" 
+                                        Padding="0" 
+                                        WidthRequest="35"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        CornerRadius="50"/>
+                        
+                        <!-- Label para mostrar la fecha -->
+                        <Label x:Name="DateTimeEntry" 
+                                Text="Fecha Limite: A Escoger..." 
+                                HorizontalOptions="Start" 
+                                VerticalOptions="Center"
+                                Margin="10,0,0,0"/>
+
 
                     </HorizontalStackLayout>
+
                 </Frame>
 
+                <StackLayout Padding="15,15,0,0" Orientation="Horizontal">
+
+                    <BoxView x:Name="ColorBoxView" WidthRequest="40" HeightRequest="40"
+                     CornerRadius="10" BackgroundColor="Transparent" 
+                     VerticalOptions="Center">
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnColorBoxTapped" />
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+
+                    <Picker x:Name="CategoriaPicker" Margin="10,0,0,0"
+                    SelectedIndexChanged="OnCategoriaPickerSelectedIndexChanged"
+                    HorizontalOptions="Start" FontSize="20" VerticalOptions="Center" FontAttributes="Italic">
+                            <!-- Las opciones se llenarán en el code-behind -->
+                        </Picker>
+                    </StackLayout>
+
                 <StackLayout Padding="5">
-                    
+
                     <Editor x:Name="TxtNota"
                             Placeholder="¿Que tienes en mente? Plasma aquí tus ideas"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="StartAndExpand"
                             AutoSize="TextChanges"
-                            Margin="0"
-                            FontSize="18"
-                            TextChanged="TituloEditor_TextChanged"/>
+                            Margin="5"
+                            FontSize="18"/>
                 </StackLayout>
+
+
+
             </VerticalStackLayout>
         </ScrollView>
 
@@ -72,7 +102,6 @@
                      HorizontalOptions="End"
                      VerticalOptions="End"
                      Margin="30"
-                     IsVisible="False"
                      Clicked="BtnGuardarNota_Clicked"/>
     </Grid>
 

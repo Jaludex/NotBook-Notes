@@ -10,7 +10,7 @@ namespace NotBook_Notes.Models
     {
         public DateTime fechaLimite { get; set; }
 
-        public Recordatorio(string Titulo, string Contentido, DateTime FechaCreacion, DateTime FechaLimite) : base(Titulo, Contentido, FechaCreacion)
+        public Recordatorio(string Titulo, string Contentido, DateTime FechaCreacion, DateTime FechaLimite, int categoria) : base(Titulo, Contentido, FechaCreacion, categoria)
         {
             this.fechaLimite = FechaLimite;
         }

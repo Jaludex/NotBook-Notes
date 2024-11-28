@@ -5,7 +5,7 @@
              x:Class="NotBook_Notes.Views.PaginaNotas"
              Title="Notas">
 
-        <VerticalStackLayout>
+    <VerticalStackLayout>
 
         <Frame
         BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
@@ -16,19 +16,21 @@
         >
             <HorizontalStackLayout>
                 <Image Source="lupa.svg"
-                       HeightRequest="30"
-                       Margin="0,0,10,0"/>
+           HeightRequest="30"
+           Margin="0,0,10,0"/>
 
 
 
                 <Entry
-                Placeholder="Frase Bonita aleatoria..."
-                FontAttributes="Bold"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center"/>
+    Placeholder="Frase Bonita aleatoria..."
+    FontAttributes="Bold"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Center"/>
 
             </HorizontalStackLayout>
         </Frame>
+
+
 
         <Button 
             Text="+ Nueva Nota"

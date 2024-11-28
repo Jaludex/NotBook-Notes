@@ -11,12 +11,14 @@ namespace NotBook_Notes.Models
         public string titulo { get; set; }
         public string contenido { get; set; }
         public DateTime fechaCreacion { get; set; }
+        public int categoria { get; set; }
 
-        public Nota(string Titulo, string Contentido, DateTime FechaCreacion) 
+        public Nota(string Titulo, string Contentido, DateTime FechaCreacion, int categoria) 
         {
             this.titulo = Titulo;
             this.contenido = Contentido;
             this.fechaCreacion = FechaCreacion;
+            this.categoria = categoria;
         }
     }
 }
