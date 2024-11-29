@@ -8,7 +8,8 @@
     Shell.FlyoutBehavior="Flyout"
     Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
     Shell.TitleColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-    Title="NotBook_Notes">
+    Title="NotBook_Notes"
+    Appearing="AppShell_Appearing">
 
     <Shell.FlyoutHeader>
         <StackLayout>
@@ -36,11 +37,6 @@
     <FlyoutItem Title="Recordatorios" Icon="campana.svg">
         <ShellContent ContentTemplate="{DataTemplate local:PaginaRecordatorios}" 
                   Route="PaginaRecordatorios"/>
-    </FlyoutItem>
-
-    <FlyoutItem Title="Calendario" Icon="calendario.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:PaginaCalendario}" 
-              Route="PaginaCalenadario"/>
     </FlyoutItem>
 
     <FlyoutItem Title="Agregar Nota" Icon="bombilla.svg" FlyoutItemIsVisible="False">
