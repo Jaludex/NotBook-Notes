@@ -87,7 +87,6 @@
                     <Picker x:Name="CategoriaPicker" Margin="10,0,0,0"
                     SelectedIndexChanged="OnCategoriaPickerSelectedIndexChanged"
                     HorizontalOptions="Start" FontSize="20" VerticalOptions="Center" FontAttributes="Italic">
-                        <!-- Las opciones se llenarán en el code-behind -->
                     </Picker>
                 </StackLayout>
 

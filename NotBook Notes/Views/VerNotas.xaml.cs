@@ -56,6 +56,7 @@ public partial class VerNotas : ContentPage
             TituloEditor.Text = seleccionada.Titulo;
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
+            Console.WriteLine(seleccionada.Categoria.NombreCategoria + "sexo");
             CategoriaPicker.SelectedIndex = ManejoDeDatos.categorias.IndexOf(seleccionada.Categoria);
             btnBorrar.IsVisible = true;
 
@@ -162,9 +163,26 @@ public partial class VerNotas : ContentPage
 
     }
 
+    private async void btnBorrar_Clicked(object sender, EventArgs e)
+    {
+        if (esEdicion)
+        {
+            bool answer = await DisplayAlert("¿Estas Seguro?", "¿Quieres Borrar este elemento?", "Borrar", "Cancelar");
+            if (answer)
+            {
+                ManejoDeDatos.papeleraViewModel.notas.Add(ManejoDeDatos.notaViewModel.notas[aEditar]);
+                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[aEditar]);
+                string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
+                await ManejoDeDatos.GuardarDatosJSONAsync(ruta);
+                await Navigation.PopAsync();
+            }
+        }
+
+    }
+
     //De aqui abajo, se maneja el date picker y el color picker
 
-	private async void DateTimePicker_Clicked(object sender, EventArgs e)
+    private async void DateTimePicker_Clicked(object sender, EventArgs e)
 	{
         INullableDateTimePickerOptions nullableDateTimePickerOptions = new NullableDateTimePickerOptions
         {
@@ -227,19 +245,5 @@ public partial class VerNotas : ContentPage
             ColorBoxView.BackgroundColor = categoriaObjetivo.ColorNotas;
 
         }
-    }
-
-    private async void btnBorrar_Clicked(object sender, EventArgs e)
-    {
-        if (esEdicion)
-        {
-            bool answer = await DisplayAlert("¿Estas Seguro?", "¿Quieres Borrar este elemento?", "Borrar", "Cancelar");
-            if (answer)
-            {
-                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[aEditar]);
-                await Navigation.PopAsync();
-            }
-        }
-
     }
 }

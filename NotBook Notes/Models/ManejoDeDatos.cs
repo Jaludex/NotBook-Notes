@@ -79,7 +79,6 @@ namespace NotBook_Notes.Models
                 List<Nota> notasAGuardar = new List<Nota>();
                 List<Recordatorio> recordsAGuardar = new List<Recordatorio>();
 
-                // Asumiendo que `notaViewModel.notas` es una lista de `Nota`
                 foreach (Nota nota in notaViewModel.notas)
                 {
                     if (nota is Recordatorio record)
@@ -147,8 +146,6 @@ namespace NotBook_Notes.Models
     {
         public List<Nota> notasModelo;
         public List<Recordatorio> recordatoriosModelo;
-        public List<Nota> papeleraNotaModelo;
-        public List<Recordatorio> papeleraRecordatoriosModelo;
         public List<Categoria> categoriasModelo;
         public List<string> frasesBonitasModelo;
         public string nombreUsuarioModelo;

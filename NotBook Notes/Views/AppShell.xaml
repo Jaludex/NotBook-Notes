@@ -38,6 +38,11 @@
                   Route="PaginaRecordatorios"/>
     </FlyoutItem>
 
+    <FlyoutItem Title="Papelera" Icon="papelera.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:Papelera}" 
+                  Route="Papelera"/>
+    </FlyoutItem>
+
     <FlyoutItem Title="Agregar Nota" Icon="bombilla.svg" FlyoutItemIsVisible="False">
         <ShellContent ContentTemplate="{DataTemplate local:VerNotas}"
                    Route="VerNotas"/>

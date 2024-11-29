@@ -10,6 +10,7 @@ using NotBook_Notes.Models;
 using System.Windows.Input;
 using NotBook_Notes.Views;
 using static AndroidX.ConstraintLayout.Core.Motion.Utils.HyperSpline;
+using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace NotBook_Notes.ViewModels
 {
@@ -91,5 +92,36 @@ namespace NotBook_Notes.ViewModels
             OnPropertyChanged(nameof(notas));
         }
 
+
+        //Estos de aqui son exclusivamente para el contexto de uso en papelera, porque que ladilla crear viewmodels nuevos cuando abos contienen la misma clase de objetos
+        public ICommand EliminarNotaCommand => new Command<Nota>(EliminarNota);
+        public ICommand RestaurarNotaCommand => new Command<Nota>(RestaurarNota);
+
+        private void EliminarNota(Nota notaSeleccionada)
+        {
+            if (notaSeleccionada != null && notas.Contains(notaSeleccionada))
+            {
+                notas.Remove(notaSeleccionada);
+                // Aquí puedes agregar lógica adicional como guardar cambios en la base de datos.
+                Console.WriteLine($"Nota eliminada: {notaSeleccionada.Titulo}");
+                string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
+                ManejoDeDatos.GuardarDatosJSONAsync(ruta);
+            }
+        }
+
+        private void RestaurarNota(Nota notaSeleccionada)
+        {
+            if (notaSeleccionada != null)
+            {
+                // Aquí puedes implementar la lógica para restaurar la nota
+                // Por ejemplo, agregarla a la lista de notas activas
+                notas.Remove(notaSeleccionada); // Eliminar de la papelera
+                                                // Agregar a la colección de notas activos si tienes uno
+                ManejoDeDatos.notaViewModel.AddNota(notaSeleccionada); // Ajusta según tu lógica
+                Console.WriteLine($"Nota restaurada: {notaSeleccionada.Titulo}");
+                string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
+                ManejoDeDatos.GuardarDatosJSONAsync(ruta);
+            }
+        }
     }
 }
