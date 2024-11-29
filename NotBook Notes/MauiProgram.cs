@@ -29,7 +29,7 @@ namespace NotBook_Notes
             builder.Logging.AddDebug();
 #endif
             //Tamporal, solo para crear algo donde trabajar
-            ManejoDeDatos.notas = new List<Nota>();
+            //ManejoDeDatos.notas = new List<Nota>();
             // Inicializa la lista de categorías
             ManejoDeDatos.categorias = new List<Categoria>();
 

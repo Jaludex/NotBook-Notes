@@ -1,11 +1,13 @@
 namespace NotBook_Notes.Views;
+using NotBook_Notes.ViewModels;
 
 public partial class PaginaNotas : ContentPage
 {
 	public PaginaNotas()
 	{
 		InitializeComponent();
-	}
+        BindingContext = new NotaViewModel();
+    }
 
     private async void BtnNuevaNota_Clicked(object sender, EventArgs e)
     {
@@ -14,4 +16,5 @@ public partial class PaginaNotas : ContentPage
 
         await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
     }
+
 }

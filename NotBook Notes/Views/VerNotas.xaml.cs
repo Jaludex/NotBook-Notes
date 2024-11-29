@@ -51,7 +51,7 @@ public partial class VerNotas : ContentPage
         }
         else
         {
-            Nota seleccionada = ManejoDeDatos.notas[aEditar];
+            Nota seleccionada = ColeccionNotas.notas[aEditar];
             TituloEditor.Text = seleccionada.Titulo;
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
@@ -59,7 +59,7 @@ public partial class VerNotas : ContentPage
 
             if (esRecordatorio)
             {
-                Recordatorio Rseleccionada = ManejoDeDatos.notas[aEditar] as Recordatorio;
+                Recordatorio Rseleccionada = ColeccionNotas.notas[aEditar] as Recordatorio;
                 if (Rseleccionada == null)
                 {
                     DisplayAlert("Error Fatal", "Ha ocurrido un error, intentalo de nuevo", "Volver");
@@ -83,12 +83,12 @@ public partial class VerNotas : ContentPage
     {
         string titulo = TituloEditor.Text;
         //Minimo un titulo
-        if (string.IsNullOrWhiteSpace(TituloEditor.Text) || ManejoDeDatos.notas.Find(u => u.Titulo == TituloEditor.Text) != null)
-        {
-            IToast mensaje = Toast.Make("Introduzca un titulo valido");
-            await mensaje.Show();
-            return;
-        }
+        //if (string.IsNullOrWhiteSpace(TituloEditor.Text) || ColeccionNotas.notas.Find(u => u.Titulo == TituloEditor.Text) != null)
+        //{
+        //    IToast mensaje = Toast.Make("Introduzca un titulo valido");
+        //    await mensaje.Show();
+        //    return;
+        //}
 
         //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
         if (esEdicion)
@@ -96,12 +96,12 @@ public partial class VerNotas : ContentPage
             if (!esRecordatorio)
             {
                 Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ManejoDeDatos.notas[aEditar] = nuevaNota;
+                ColeccionNotas.notas[aEditar] = nuevaNota;
             }
             else if (fechaLimite.HasValue)
             {
                 Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
-                ManejoDeDatos.notas[aEditar] = nuevoRecordatorio;
+                ColeccionNotas.notas[aEditar] = nuevoRecordatorio;
             }
             else
             {
@@ -117,14 +117,14 @@ public partial class VerNotas : ContentPage
             {
                 //Creamos una nota comun
                 Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ManejoDeDatos.notas.Add(nuevaNota);
+                ColeccionNotas.notas.Add(nuevaNota);
                 await Navigation.PopAsync();
             }
             else if (fechaLimite.HasValue)
             {
                 //Creamos un recordatorio
                 Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
-                ManejoDeDatos.notas.Add(nuevoRecordatorio);
+                ColeccionNotas.notas.Add(nuevoRecordatorio);
                 //llamamos a establecer la notificion correspondiente
                 await Navigation.PopAsync();
             }
@@ -204,11 +204,5 @@ public partial class VerNotas : ContentPage
         }
     }
 
-    public void MainPage()
-    {
-        InitializeComponent();
 
-        // Establecer el BindingContext para la página
-        BindingContext = new NotaViewModel();
-    }
 }

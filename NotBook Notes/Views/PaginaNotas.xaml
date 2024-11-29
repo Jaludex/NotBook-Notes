@@ -58,5 +58,17 @@
         <Label Text="Aqui iran las notas"
                HorizontalOptions="Center"/>
 
+        <!--Prueba 1.1 del DataBinding-->
+        <StackLayout Padding="20">
+            <Label Text="Título de la Nota" FontSize="20" HorizontalOptions="Center" />
+            <Label Text="{Binding Nota.Titulo}" FontSize="24" HorizontalOptions="Center" />
+
+            <Label Text="Contenido de la Nota" FontSize="20" HorizontalOptions="Center" />
+            <Label Text="{Binding Nota.Contenido}" FontSize="20" HorizontalOptions="Center" />
+
+            <Button Text="Cambiar Título"
+                Command="{Binding CambiarTituloCommand}" />
+        </StackLayout>
+
     </VerticalStackLayout>
 </ContentPage>

@@ -9,7 +9,6 @@ namespace NotBook_Notes.Models
     public static class ManejoDeDatos
     {
         public static List<Categoria> categorias;
-        public static List<Nota> notas;
 
         //Aqui va la importacion de datos de categorias
     }
