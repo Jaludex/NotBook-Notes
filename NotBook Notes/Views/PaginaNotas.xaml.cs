@@ -1,4 +1,6 @@
 namespace NotBook_Notes.Views;
+
+using NotBook_Notes.Models;
 using NotBook_Notes.ViewModels;
 
 public partial class PaginaNotas : ContentPage
