@@ -20,10 +20,11 @@
 
 
             <Entry
-            Placeholder="Frase Bonita aleatoria..."
-            FontAttributes="Bold"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="Center"/>
+                   Placeholder="Frase Bonita aleatoria..."
+                   FontAttributes="Bold"
+                   ClearButtonVisibility="WhileEditing"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"/>
 
             </HorizontalStackLayout>
         </Frame>

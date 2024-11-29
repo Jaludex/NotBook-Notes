@@ -36,6 +36,9 @@
                        IsVisible="False"
                        x:Name="FrameRecordatorio">
 
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFrameRecordatorioTapped" />
+                    </Frame.GestureRecognizers>
                     <HorizontalStackLayout HorizontalOptions="Fill" HeightRequest="40">
 
 

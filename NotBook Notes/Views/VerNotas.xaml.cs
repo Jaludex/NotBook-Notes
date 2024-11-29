@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using Maui.NullableDateTimePicker;
+using Microsoft.Maui.Controls.Platform;
 using NotBook_Notes.Models;
 using NotBook_Notes.ViewModels;
 using System;
@@ -51,7 +52,7 @@ public partial class VerNotas : ContentPage
         }
         else
         {
-            Nota seleccionada = ColeccionNotas.notas[aEditar];
+            Nota seleccionada = ManejoDeDatos.notaViewModel.notas[aEditar];
             TituloEditor.Text = seleccionada.Titulo;
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
@@ -59,7 +60,7 @@ public partial class VerNotas : ContentPage
 
             if (esRecordatorio)
             {
-                Recordatorio Rseleccionada = ColeccionNotas.notas[aEditar] as Recordatorio;
+                Recordatorio Rseleccionada = ManejoDeDatos.notaViewModel.notas[aEditar] as Recordatorio;
                 if (Rseleccionada == null)
                 {
                     DisplayAlert("Error Fatal", "Ha ocurrido un error, intentalo de nuevo", "Volver");
@@ -83,25 +84,35 @@ public partial class VerNotas : ContentPage
     {
         string titulo = TituloEditor.Text;
         //Minimo un titulo
-        //if (string.IsNullOrWhiteSpace(TituloEditor.Text) || ColeccionNotas.notas.Find(u => u.Titulo == TituloEditor.Text) != null)
-        //{
-        //    IToast mensaje = Toast.Make("Introduzca un titulo valido");
-        //    await mensaje.Show();
-        //    return;
-        //}
+        if (string.IsNullOrWhiteSpace(titulo) || ManejoDeDatos.notaViewModel.EncontrarNota(titulo) != -1)
+        {
+            IToast mensaje = Toast.Make("Introduzca un titulo valido");
+            await mensaje.Show();
+            return;
+        }
 
         //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
         if (esEdicion)
         {
             if (!esRecordatorio)
             {
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ColeccionNotas.notas[aEditar] = nuevaNota;
+                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, categoriaObjetivo);
+                ManejoDeDatos.notaViewModel.notas[aEditar] = nuevaNota;
+                ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
+                //Cambio esto al momento para asegurar que se llame al property changed
+
+                IToast mensaje = Toast.Make("Nota Guardada");
+                await mensaje.Show();
             }
             else if (fechaLimite.HasValue)
             {
-                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
-                ColeccionNotas.notas[aEditar] = nuevoRecordatorio;
+                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
+                ManejoDeDatos.notaViewModel.notas[aEditar] = nuevoRecordatorio;
+                ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
+
+                //Aqui llamamos a quitar la notificacion anterior y colocar la que tiene la nueva fecha limite
+                IToast mensaje = Toast.Make("Recordatorio Guardado");
+                await mensaje.Show();
             }
             else
             {
@@ -117,15 +128,19 @@ public partial class VerNotas : ContentPage
             {
                 //Creamos una nota comun
                 Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ColeccionNotas.notas.Add(nuevaNota);
+                ManejoDeDatos.notaViewModel.notas.Add(nuevaNota);
+                IToast mensaje = Toast.Make("Nota Creada");
+                await mensaje.Show();
                 await Navigation.PopAsync();
             }
             else if (fechaLimite.HasValue)
             {
                 //Creamos un recordatorio
                 Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
-                ColeccionNotas.notas.Add(nuevoRecordatorio);
+                ManejoDeDatos.notaViewModel.notas.Add(nuevoRecordatorio);
                 //llamamos a establecer la notificion correspondiente
+                IToast mensaje = Toast.Make("Recordatorio Creado");
+                await mensaje.Show();
                 await Navigation.PopAsync();
             }
             else
@@ -169,6 +184,12 @@ public partial class VerNotas : ContentPage
         }
     }
 
+    //Que tocar el frame de la fecha tambien abra el calendario
+    private void OnFrameRecordatorioTapped(object sender, EventArgs e)
+    {
+        DateTimePicker_Clicked(sender, e);
+    }
+
     private void CargarCategorias()
     {
         foreach (var categoria in ManejoDeDatos.categorias)
@@ -182,7 +203,7 @@ public partial class VerNotas : ContentPage
 
     private void OnColorBoxTapped(object sender, EventArgs e)
     {
-        CategoriaPicker.Focus(); // Esto activará el Picker
+        CategoriaPicker.Focus(); // Esto activará el Picker cuando se le de al circulo de color
     }
 
     private void OnCategoriaPickerSelectedIndexChanged(object sender, EventArgs e)

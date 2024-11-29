@@ -1,8 +1,11 @@
-﻿namespace NotBook_Notes.Views
+﻿using NotBook_Notes.ViewModels;
+
+namespace NotBook_Notes.Views
 {
     public partial class AppShell : Shell
     {
         public Dictionary<string, Type> Rutas = new Dictionary<string, Type>();
+
         public AppShell()
         {
             InitializeComponent();
