@@ -9,25 +9,34 @@ using System.Runtime.CompilerServices;
 using NotBook_Notes.Models;
 using System.Windows.Input;
 using NotBook_Notes.Views;
+using static AndroidX.ConstraintLayout.Core.Motion.Utils.HyperSpline;
 
 namespace NotBook_Notes.ViewModels
 {
     public class NotaViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Nota> notas { get; set; }
+        public ObservableCollection<Nota> _notas { get; set; }
         public ObservableCollection<Nota> notasFiltradas { get; set; }
+
+        public ObservableCollection<Nota> notas
+        {
+            get => _notas;
+            set
+            {
+                _notas = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void AddNota(Nota nuevaNota)
+        {
+            notas.Add(nuevaNota);
+            OnPropertyChanged();
+        }
 
         public NotaViewModel()
         {
-            if(notas == null)
-            { 
-            // que muestre el texto de que no hay nada
             notas = new ObservableCollection<Nota>();
-            }
-            else
-            {
-
-            }
         }
 
         public int NumeroDeColumnas
@@ -63,16 +72,23 @@ namespace NotBook_Notes.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        //Esto se va a encargar de abrir la nota para visualizar y/o editar
-        public ICommand NotaSeleccionadaCommand => new Command<Nota>(AbrirNota);
+        public ICommand OpcionesNotaCommand => new Command<Nota>(ObtenerOpcionesNota);
 
-        private async void AbrirNota(Nota nota)
+        // Método que se llama al hacer clic
+        private void ObtenerOpcionesNota(Nota notaSeleccionada)
         {
-            int encontrado = EncontrarNota(nota.Titulo);
-            if (nota != null && encontrado != -1)
+            // Encuentra la posición de la nota seleccionada
+            int posicion = notas.IndexOf(notaSeleccionada);
+
+            if (posicion >= 0)
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new VerNotas(nota is Recordatorio, encontrado));
+                AppShell.Current.Navigation.PushAsync(new VerNotas(notaSeleccionada is Recordatorio, posicion));
             }
+        }
+
+        public void ActualizarNotas()
+        {
+            OnPropertyChanged(nameof(notas));
         }
 
     }

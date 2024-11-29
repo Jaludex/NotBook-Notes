@@ -1,4 +1,5 @@
 namespace NotBook_Notes.Views;
+
 using NotBook_Notes.Models;
 using NotBook_Notes.ViewModels;
 
@@ -8,6 +9,7 @@ public partial class PaginaNotas : ContentPage
 	public PaginaNotas()
 	{
 		InitializeComponent();
+
         BindingContext = ManejoDeDatos.notaViewModel;
     }
 
@@ -17,6 +19,14 @@ public partial class PaginaNotas : ContentPage
         var verNotasPage = new VerNotas(esRecordatorio);
 
         await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
+        
     }
 
+    protected override void OnAppearing() // Este método se llama cada vez que la página está a punto de aparecer.
+    {
+        base.OnAppearing();
+        Console.WriteLine("NotasPage se está apareciendo."); // Esto debería aparecer en la consola
+        // Llama a un método para recargar el contenido
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
+    }
 }

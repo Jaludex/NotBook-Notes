@@ -12,7 +12,7 @@ namespace NotBook_Notes.Models
         private string _titulo;
         private string _contenido;
         private DateTime _fechaCreacion;
-        private int _categoria;
+        private Categoria _categoria;
 
         // Propiedad Titulo con notificación de cambios
         [JsonProperty("titulo")]
@@ -61,7 +61,7 @@ namespace NotBook_Notes.Models
 
         // Propiedad Categoria con notificación de cambios
         [JsonProperty("categoria")]
-        public int Categoria
+        public Categoria Categoria
         {
             get => _categoria;
             set
@@ -75,7 +75,7 @@ namespace NotBook_Notes.Models
         }
 
         // Constructor
-        public Nota(string titulo, string contenido, DateTime fechaCreacion, int categoria)
+        public Nota(string titulo, string contenido, DateTime fechaCreacion, Categoria categoria)
         {
             Titulo = titulo;
             Contenido = contenido;
