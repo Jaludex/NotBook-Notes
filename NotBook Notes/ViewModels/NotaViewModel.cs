@@ -8,40 +8,35 @@ using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using NotBook_Notes.Models;
 using System.Windows.Input;
+using NotBook_Notes.Views;
 
 namespace NotBook_Notes.ViewModels
 {
     public class NotaViewModel : INotifyPropertyChanged
     {
-        private Nota _nota;
-
-        public Nota Nota
-        {
-            get => _nota;
-            set
-            {
-                if (_nota != value)
-                {
-                    _nota = value;
-                    OnPropertyChanged();  // Notificar cambio
-                }
-            }
-        }
-
-        public ICommand CambiarTituloCommand { get; }
+        public ObservableCollection<Nota> notas { get; set; }
 
         public NotaViewModel()
         {
-            // Inicializa la propiedad Nota con valores predeterminados
-            Nota = new Nota("Mi primera nota", "Este es el contenido de la nota.", new DateTime(2001, 2, 10), 2);
-
-            // Inicializa el comando
-            CambiarTituloCommand = new Command(CambiarTitulo);
+            notas = new ObservableCollection<Nota>();
         }
 
-        private void CambiarTitulo()
+        //Busca una nota, si la encuentra suelta la posicion, si no, -1
+        //Ya que observablecolllection no tiene metodos .find como las listas
+        public int EncontrarNota(string titulo)
         {
-            Nota.Titulo = "Nuevo título de la nota";
+            if (notas == null || notas.Count == 0)
+            { return -1; }
+
+            for (int i = 0; i < titulo.Length; i++)
+            {
+                if (notas[i].Titulo == titulo)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,6 +45,18 @@ namespace NotBook_Notes.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-    
+
+        //Esto se va a encargar de abrir la nota para visualizar y/o editar
+        public ICommand NotaSeleccionadaCommand => new Command<Nota>(AbrirNota);
+
+        private async void AbrirNota(Nota nota)
+        {
+            int encontrado = EncontrarNota(nota.Titulo);
+            if (nota != null && encontrado != -1)
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(new VerNotas(nota is Recordatorio, encontrado));
+            }
+        }
+
     }
 }

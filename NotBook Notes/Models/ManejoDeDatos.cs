@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotBook_Notes.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace NotBook_Notes.Models
     public static class ManejoDeDatos
     {
         public static List<Categoria> categorias;
+        public static NotaViewModel notaViewModel = new NotaViewModel();
 
         //Aqui va la importacion de datos de categorias
     }
