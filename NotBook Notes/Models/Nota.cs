@@ -1,24 +1,89 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace NotBook_Notes.Models
 {
-    public class Nota
+    public class Nota : INotifyPropertyChanged
     {
-        public string titulo { get; set; }
-        public string contenido { get; set; }
-        public DateTime fechaCreacion { get; set; }
-        public int categoria { get; set; }
+        // Campos privados tienen que seguir esta estructura
+        private string _titulo;
+        private string _contenido;
+        private DateTime _fechaCreacion;
+        private int _categoria;
 
-        public Nota(string Titulo, string Contentido, DateTime FechaCreacion, int categoria) 
+        // Propiedad Titulo con notificación de cambios
+        public string Titulo
         {
-            this.titulo = Titulo;
-            this.contenido = Contentido;
-            this.fechaCreacion = FechaCreacion;
-            this.categoria = categoria;
+            get => _titulo;
+            set
+            {
+                if (_titulo != value)
+                {
+                    _titulo = value;
+                    OnPropertyChanged();  // Notificar cambio
+                }
+            }
+        }
+
+        // Propiedad Contenido con notificación de cambios
+        public string Contenido
+        {
+            get => _contenido;
+            set
+            {
+                if (_contenido != value)
+                {
+                    _contenido = value;
+                    OnPropertyChanged();  // Notificar cambio
+                }
+            }
+        }
+
+        // Propiedad FechaCreacion con notificación de cambios
+        public DateTime FechaCreacion
+        {
+            get => _fechaCreacion;
+            set
+            {
+                if (_fechaCreacion != value)
+                {
+                    _fechaCreacion = value;
+                    OnPropertyChanged();  // Notificar cambio
+                }
+            }
+        }
+
+        // Propiedad Categoria con notificación de cambios
+        public int Categoria
+        {
+            get => _categoria;
+            set
+            {
+                if (_categoria != value)
+                {
+                    _categoria = value;
+                    OnPropertyChanged();  // Notificar cambio
+                }
+            }
+        }
+
+        // Constructor
+        public Nota(string titulo, string contenido, DateTime fechaCreacion, int categoria)
+        {
+            Titulo = titulo;
+            Contenido = contenido;
+            FechaCreacion = fechaCreacion;
+            Categoria = categoria;
+        }
+
+        // Implementación de la interfaz INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // Método para notificar a la vista que una propiedad ha cambiado
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

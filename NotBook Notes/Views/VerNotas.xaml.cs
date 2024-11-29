@@ -2,6 +2,7 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 using Maui.NullableDateTimePicker;
 using NotBook_Notes.Models;
+using NotBook_Notes.ViewModels;
 using System;
 
 namespace NotBook_Notes.Views;
@@ -51,10 +52,10 @@ public partial class VerNotas : ContentPage
         else
         {
             Nota seleccionada = ManejoDeDatos.notas[aEditar];
-            TituloEditor.Text = seleccionada.titulo;
-            LabelFechaCreacion.Text = "Edición: " + seleccionada.fechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
-            TxtNota.Text = seleccionada.contenido;
-            CategoriaPicker.SelectedIndex = seleccionada.categoria;
+            TituloEditor.Text = seleccionada.Titulo;
+            LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
+            TxtNota.Text = seleccionada.Contenido;
+            CategoriaPicker.SelectedIndex = seleccionada.Categoria;
 
             if (esRecordatorio)
             {
@@ -82,7 +83,7 @@ public partial class VerNotas : ContentPage
     {
         string titulo = TituloEditor.Text;
         //Minimo un titulo
-        if (string.IsNullOrWhiteSpace(TituloEditor.Text) || ManejoDeDatos.notas.Find(u => u.titulo == TituloEditor.Text) != null)
+        if (string.IsNullOrWhiteSpace(TituloEditor.Text) || ManejoDeDatos.notas.Find(u => u.Titulo == TituloEditor.Text) != null)
         {
             IToast mensaje = Toast.Make("Introduzca un titulo valido");
             await mensaje.Show();
@@ -160,11 +161,11 @@ public partial class VerNotas : ContentPage
     {
         foreach (var categoria in ManejoDeDatos.categorias)
         {
-            CategoriaPicker.Items.Add(categoria.nombreCategoría);
+            CategoriaPicker.Items.Add(categoria.NombreCategoría);
         }
 
         CategoriaPicker.SelectedIndex = 0;
-        ColorBoxView.BackgroundColor = ManejoDeDatos.categorias[0].colorNotas;
+        ColorBoxView.BackgroundColor = ManejoDeDatos.categorias[0].ColorNotas;
     }
 
     private void OnColorBoxTapped(object sender, EventArgs e)
@@ -182,12 +183,20 @@ public partial class VerNotas : ContentPage
             string categoriaSeleccionada = CategoriaPicker.SelectedItem.ToString();
 
             // Encontrar el color correspondiente a la categoría seleccionada
-            Color colorSeleccionado = ManejoDeDatos.categorias[selectedIndex].colorNotas;
+            Color colorSeleccionado = ManejoDeDatos.categorias[selectedIndex].ColorNotas;
 
             // Cambiar el color del BoxView al de la categoría seleccionada
             ColorBoxView.BackgroundColor = colorSeleccionado;
 
             categoriaObjetivo = selectedIndex;
         }
+    }
+
+    public void MainPage()
+    {
+        InitializeComponent();
+
+        // Establecer el BindingContext para la página
+        BindingContext = new NotaViewModel();
     }
 }

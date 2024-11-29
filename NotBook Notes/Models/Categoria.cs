@@ -8,13 +8,13 @@ namespace NotBook_Notes.Models
 {
     public class Categoria
     {
-        public String nombreCategoría { get; set; }
-        public Color colorNotas { get; set; }
+        public String NombreCategoría { get; set; }
+        public Color ColorNotas { get; set; }
 
         public Categoria(string Nombre, Color ColorNotas) 
         {
-            this.colorNotas = ColorNotas;
-            this.nombreCategoría = Nombre;
+            this.ColorNotas = ColorNotas;
+            this.NombreCategoría = Nombre;
         }
     }
 }

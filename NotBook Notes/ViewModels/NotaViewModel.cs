@@ -4,32 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
+using NotBook_Notes.Models;
 
 namespace NotBook_Notes.ViewModels
 {
-    class NotaViewModel : INotifyPropertyChanged
+    public class NotaViewModel
     {
-        public string _Titulo;
-        public string _Contenido;
-        public DateTime _FechaCreacion;
+       public Nota Nota { get; set; }
 
-        public string Contenido
-        {
-            get => _Contenido;
-            set
-            {
-                if (_Contenido != value)
-                {
-                    _Contenido = value;
-                    OnPropertyChanged(nameof(Contenido));  // Notifica a la vista sobre el cambio
-                }
-            }
-        }
+       public NotaViewModel()
+       {
+         Nota = new Nota("Mi primera nota", "Este es el contenido de la nota.", new DateTime(2001, 2, 10), 2);
+       }
+        CambiarTituloCommand = new Command(CambiarTitulo);
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void CambiarTitulo()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Nota.Titulo = "Nuevo título de la nota";
         }
     }
 }
