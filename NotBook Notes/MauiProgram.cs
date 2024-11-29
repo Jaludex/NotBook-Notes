@@ -3,6 +3,8 @@ using Maui.NullableDateTimePicker;
 using Microsoft.Extensions.Logging;
 using NotBook_Notes.Models;
 using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Compatibility;
 
 namespace NotBook_Notes
 {

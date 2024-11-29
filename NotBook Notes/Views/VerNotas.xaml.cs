@@ -95,13 +95,16 @@ public partial class VerNotas : ContentPage
         {
             if (!esRecordatorio)
             {
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
+                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notas[aEditar].FechaCreacion, categoriaObjetivo);
                 ColeccionNotas.notas[aEditar] = nuevaNota;
+                ColeccionNotas.notas[aEditar].FechaCreacion = DateTime.Now;
+                //Cambio esto al momento para asegurar que se llame al property changed
             }
             else if (fechaLimite.HasValue)
             {
-                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
+                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
                 ColeccionNotas.notas[aEditar] = nuevoRecordatorio;
+                ColeccionNotas.notas[aEditar].FechaCreacion = DateTime.Now;
             }
             else
             {
@@ -169,6 +172,12 @@ public partial class VerNotas : ContentPage
         }
     }
 
+    //Que tocar el frame de la fecha tambien abra el calendario
+    private void OnFrameRecordatorioTapped(object sender, EventArgs e)
+    {
+        DateTimePicker_Clicked(sender, e);
+    }
+
     private void CargarCategorias()
     {
         foreach (var categoria in ManejoDeDatos.categorias)
@@ -182,7 +191,7 @@ public partial class VerNotas : ContentPage
 
     private void OnColorBoxTapped(object sender, EventArgs e)
     {
-        CategoriaPicker.Focus(); // Esto activará el Picker
+        CategoriaPicker.Focus(); // Esto activará el Picker cuando se le de al circulo de color
     }
 
     private void OnCategoriaPickerSelectedIndexChanged(object sender, EventArgs e)
