@@ -18,7 +18,6 @@ namespace NotBook_Notes.Views
             try
             {
                 Rutas.Add(nameof(PaginaNotas), typeof(PaginaNotas));
-                Rutas.Add(nameof(PaginaCalendario), typeof(PaginaCalendario));
                 Rutas.Add(nameof(PaginaRecordatorios), typeof(PaginaRecordatorios));
                 Rutas.Add(nameof(VerNotas), typeof(VerNotas));
 
@@ -33,5 +32,7 @@ namespace NotBook_Notes.Views
                 Application.Current.Quit();
             }
         }
+
+
     }
 }

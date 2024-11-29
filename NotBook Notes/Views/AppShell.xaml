@@ -38,11 +38,6 @@
                   Route="PaginaRecordatorios"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Calendario" Icon="calendario.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:PaginaCalendario}" 
-              Route="PaginaCalenadario"/>
-    </FlyoutItem>
-
     <FlyoutItem Title="Agregar Nota" Icon="bombilla.svg" FlyoutItemIsVisible="False">
         <ShellContent ContentTemplate="{DataTemplate local:VerNotas}"
                    Route="VerNotas"/>
