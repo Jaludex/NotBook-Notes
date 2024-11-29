@@ -26,7 +26,8 @@ public partial class PaginaNotas : ContentPage
     {
         base.OnAppearing();
         Console.WriteLine("NotasPage se está apareciendo."); // Esto debería aparecer en la consola
-        // Llama a un método para recargar el contenido
+        string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
+        ManejoDeDatos.GuardarDatosJSONAsync(ruta);
         ManejoDeDatos.notaViewModel.ActualizarNotas();
     }
 }

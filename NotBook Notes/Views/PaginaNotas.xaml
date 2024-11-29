@@ -51,7 +51,7 @@
                     HeightRequest="100">
 
                     <!-- Label a la izquierda -->
-                    <Label Text="Nota" 
+                    <Label Text="Notas Guardadas" 
                    FontSize="24" 
                    Margin="10,10,0,0" />     
 
