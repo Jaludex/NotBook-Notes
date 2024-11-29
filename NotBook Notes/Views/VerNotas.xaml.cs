@@ -92,21 +92,34 @@ public partial class VerNotas : ContentPage
         //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
         if (esEdicion)
         {
-            if (esRecordatorio && fechaLimite.HasValue)
+            if (!esRecordatorio)
+            {
+                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
+                ManejoDeDatos.notas[aEditar] = nuevaNota;
+            }
+            else if (fechaLimite.HasValue)
             {
                 Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
                 ManejoDeDatos.notas[aEditar] = nuevoRecordatorio;
             }
             else
             {
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ManejoDeDatos.notas[aEditar] = nuevaNota;
+                IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
+                await mensaje.Show();
+                return;
             }
         }
         //Es de creacion
         else
         {
-            if (esRecordatorio && fechaLimite.HasValue)
+            if (!esRecordatorio)
+            {
+                //Creamos una nota comun
+                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
+                ManejoDeDatos.notas.Add(nuevaNota);
+                await Navigation.PopAsync();
+            }
+            else if (fechaLimite.HasValue)
             {
                 //Creamos un recordatorio
                 Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
@@ -116,10 +129,9 @@ public partial class VerNotas : ContentPage
             }
             else
             {
-                //Creamos una nota comun
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ManejoDeDatos.notas.Add(nuevaNota);
-                await Navigation.PopAsync();
+                IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
+                await mensaje.Show();
+                return;
             }
         }
 
