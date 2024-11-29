@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Newtonsoft.Json;
 
 namespace NotBook_Notes.Models
 {
@@ -14,6 +15,7 @@ namespace NotBook_Notes.Models
         private int _categoria;
 
         // Propiedad Titulo con notificación de cambios
+        [JsonProperty("titulo")]
         public string Titulo
         {
             get => _titulo;
@@ -28,6 +30,7 @@ namespace NotBook_Notes.Models
         }
 
         // Propiedad Contenido con notificación de cambios
+        [JsonProperty("contenido")]
         public string Contenido
         {
             get => _contenido;
@@ -42,6 +45,7 @@ namespace NotBook_Notes.Models
         }
 
         // Propiedad FechaCreacion con notificación de cambios
+        [JsonProperty("fechaCreacion")]
         public DateTime FechaCreacion
         {
             get => _fechaCreacion;
@@ -56,6 +60,7 @@ namespace NotBook_Notes.Models
         }
 
         // Propiedad Categoria con notificación de cambios
+        [JsonProperty("categoria")]
         public int Categoria
         {
             get => _categoria;
