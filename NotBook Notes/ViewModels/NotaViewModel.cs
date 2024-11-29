@@ -15,20 +15,19 @@ namespace NotBook_Notes.ViewModels
     public class NotaViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Nota> notas { get; set; }
+        public ObservableCollection<Nota> notasFiltradas { get; set; }
 
         public NotaViewModel()
         {
-            //notas = new ObservableCollection<Nota>(); 
-            // Inicializando la colección con algunas notas de ejemplo
-            notas = new ObservableCollection<Nota>
+            if(notas == null)
+            { 
+            // que muestre el texto de que no hay nada
+            notas = new ObservableCollection<Nota>();
+            }
+            else
             {
-                new Nota("Nota 1", "Contenido de la primera nota", DateTime.Now, 1),
-                new Nota("Nota 2", "Contenido de la segunda nota", DateTime.Now.AddDays(1), 2),
-                new Nota("Nota 3", "Contenido de la tercera nota", DateTime.Now.AddDays(2), 3),
-                new Nota("Nota 4", "Contenido de la primera nota", DateTime.Now, 1),
-                new Nota("Nota 5", "Contenido de la segunda nota", DateTime.Now.AddDays(1), 2),
-                new Nota("Nota 6", "Contenido de la tercera nota", DateTime.Now.AddDays(2), 3),
-            };
+
+            }
         }
 
         public int NumeroDeColumnas
