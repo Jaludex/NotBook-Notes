@@ -1,3 +1,5 @@
+using NotBook_Notes.Models;
+
 namespace NotBook_Notes.Views;
 
 public partial class PaginaRecordatorios : ContentPage

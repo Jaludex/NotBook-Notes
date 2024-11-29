@@ -48,7 +48,7 @@ namespace NotBook_Notes
             ManejoDeDatos.categorias.Add(new Categoria("Viajes", Color.FromArgb("#FFB0E0E6"))); // Azul acero (LightSteelBlue)
             ManejoDeDatos.categorias.Add(new Categoria("Hobbies", Color.FromArgb("#FFFFA500")));
 
-
+            ManejoDeDatos.CargarDatosJSON(Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json"));
             return builder.Build();
         }
     }

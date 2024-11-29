@@ -62,13 +62,23 @@ namespace NotBook_Notes.Models
         }
 
         //Este usa la ruta default o la ruta docuemts para hacer un backup
-        public static void GuardarDatosJSON(string Ruta)
+        public static async Task GuardarDatosJSONAsync(string ruta)
         {
+            // Si el archivo no existe, créalo
+            if (!File.Exists(ruta))
+            {
+                using (var stream = File.Create(ruta))
+                {
+                    // El archivo se crea y se cierra inmediatamente
+                }
+            }
+
             try
             {
                 List<Nota> notasAGuardar = new List<Nota>();
                 List<Recordatorio> recordsAGuardar = new List<Recordatorio>();
 
+                // Asumiendo que `notaViewModel.notas` es una lista de `Nota`
                 foreach (Nota nota in notaViewModel.notas)
                 {
                     if (nota is Recordatorio record)
@@ -85,19 +95,23 @@ namespace NotBook_Notes.Models
                 {
                     notasModelo = notasAGuardar,
                     recordatoriosModelo = recordsAGuardar,
-                    categoriasModelo = categorias,
-                    frasesBonitasModelo = frasesBonitas,
+                    categoriasModelo = categorias, // Asegúrate de que `categorias` esté definida
+                    frasesBonitasModelo = frasesBonitas, // Asegúrate de que `frasesBonitas` esté definida
                     nombreUsuarioModelo = nombreUsuario
                 };
 
                 string json = JsonConvert.SerializeObject(datos, Formatting.Indented);
-                File.WriteAllText(Ruta, json);
+
+                // Guardar el JSON en el archivo
+                await File.WriteAllTextAsync(ruta, json);
+                Console.WriteLine(ruta + "pito");
+
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine("Aqui estooooy" + ex.ToString());
             }
-
         }
 
         public static string GetRutaBackups()

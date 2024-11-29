@@ -8,8 +8,7 @@
     Shell.FlyoutBehavior="Flyout"
     Shell.ForegroundColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
     Shell.TitleColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-    Title="NotBook_Notes"
-    Appearing="AppShell_Appearing">
+    Title="NotBook_Notes">
 
     <Shell.FlyoutHeader>
         <StackLayout>
