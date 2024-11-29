@@ -74,19 +74,22 @@
                     <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="NotaCollectionView">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BorderColor="Gray" Padding="20" Margin="10,10,10,0" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource White}}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference NotaCollectionView}, Path=BindingContext.OpcionesNotaCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                    <!-- Pasa la nota completa -->
-                                </Frame.GestureRecognizers>
-                                <StackLayout HorizontalOptions="FillAndExpand">
-                                        <Label Text="{Binding Titulo}" FontSize="18" HorizontalOptions="FillAndExpand"/>
-                                        <Label Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
-                                        <Label Text="{Binding Categoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
-                                        <Label Text="{Binding Contenido}" FontSize="15" HorizontalOptions="FillAndExpand"/>
-                                    </StackLayout>
+                                <Frame BorderColor="Gray" Padding="-2" Margin="10,10,10,0" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource White}}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference NotaCollectionView}, Path=BindingContext.OpcionesNotaCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                        <!-- Pasa la nota completa -->
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                        
+                                    <Frame BackgroundColor="{Binding Categoria.ColorNotas}" HeightRequest="20" Padding="0" Margin="0" CornerRadius="0"/>
+
+                                    <Label Margin="20,10,20,0" Text="{Binding Titulo}" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,0" Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,0" Text="{Binding Categoria.NombreCategoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,20" Text="{Binding Contenido}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

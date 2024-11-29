@@ -24,9 +24,19 @@
 
 
 
-                <Label x:Name="LabelFechaCreacion"
-                       Text="Fecha de Creacion: "
-                       Margin="20,10,0,0"/>
+                <FlexLayout Margin="20,10, 20, 0" JustifyContent="SpaceBetween">
+                    <Label x:Name="LabelFechaCreacion"
+                    Text="Fecha de Creacion: "
+                    VerticalOptions="Center"
+                    />
+                    <ImageButton Source="papelera.svg"
+                                 x:Name="btnBorrar"
+                                 WidthRequest="40"
+                                 HeightRequest="40"
+                                 Clicked="btnBorrar_Clicked"
+                                 IsVisible="False"
+                                 VerticalOptions="Center"/>
+                </FlexLayout>
 
                 <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}"
                        Margin="10, 10, 10, 0"

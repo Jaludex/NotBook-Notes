@@ -13,7 +13,7 @@ public partial class VerNotas : ContentPage
 	bool esRecordatorio;
     bool esEdicion;
 	DateTime? fechaLimite;
-    string categoriaObjetivo;
+    Categoria categoriaObjetivo;
     int aEditar;
 
     public VerNotas(bool esRecordatorio)
@@ -56,7 +56,8 @@ public partial class VerNotas : ContentPage
             TituloEditor.Text = seleccionada.Titulo;
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
-            CategoriaPicker.SelectedIndex = ManejoDeDatos.categorias.FindIndex(u => u.NombreCategoría == categoriaObjetivo);
+            CategoriaPicker.SelectedIndex = ManejoDeDatos.categorias.IndexOf(seleccionada.Categoria);
+            btnBorrar.IsVisible = true;
 
             if (esRecordatorio)
             {
@@ -202,7 +203,7 @@ public partial class VerNotas : ContentPage
     {
         foreach (var categoria in ManejoDeDatos.categorias)
         {
-            CategoriaPicker.Items.Add(categoria.NombreCategoría);
+            CategoriaPicker.Items.Add(categoria.NombreCategoria);
         }
 
         CategoriaPicker.SelectedIndex = 0;
@@ -220,18 +221,25 @@ public partial class VerNotas : ContentPage
 
         if (selectedIndex != -1)
         {
-            // Obtener la categoría seleccionada
-            string categoriaSeleccionada = CategoriaPicker.SelectedItem.ToString();
-
-            // Encontrar el color correspondiente a la categoría seleccionada
-            Color colorSeleccionado = ManejoDeDatos.categorias[selectedIndex].ColorNotas;
+            categoriaObjetivo = ManejoDeDatos.categorias[selectedIndex];
 
             // Cambiar el color del BoxView al de la categoría seleccionada
-            ColorBoxView.BackgroundColor = colorSeleccionado;
+            ColorBoxView.BackgroundColor = categoriaObjetivo.ColorNotas;
 
-            categoriaObjetivo = categoriaSeleccionada;
         }
     }
 
+    private async void btnBorrar_Clicked(object sender, EventArgs e)
+    {
+        if (esEdicion)
+        {
+            bool answer = await DisplayAlert("¿Estas Seguro?", "¿Quieres Borrar este elemento?", "Borrar", "Cancelar");
+            if (answer)
+            {
+                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[aEditar]);
+                await Navigation.PopAsync();
+            }
+        }
 
+    }
 }
