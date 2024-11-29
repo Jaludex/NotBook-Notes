@@ -13,18 +13,18 @@
                 CornerRadius="25"
                 >
             <HorizontalStackLayout>
-            <Image Source="lupa.svg"
+                <Image Source="lupa.svg"
                    HeightRequest="30"
                    Margin="0,0,10,0"/>
-                    
 
 
-            <Entry
+                <Entry
                    Placeholder="Frase Bonita aleatoria..."
                    FontAttributes="Bold"
                    ClearButtonVisibility="WhileEditing"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                                            WidthRequest="270"/>
 
             </HorizontalStackLayout>
         </Frame>

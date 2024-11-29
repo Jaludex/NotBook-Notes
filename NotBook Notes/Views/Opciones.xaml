@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotBook_Notes.Views.Opciones"
+             Title="Opciones">
+    <VerticalStackLayout>
+        <Button Text="Cambiar Nombre" BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnCambiarNombre" Clicked="btnCambiarNombre_Clicked"/>
+        <Button Text="BORRAR TODOS LOS DATOS" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnBorrarTodo" Clicked="btnBorrarTodo_Clicked"/>
+        <Button Text="Acerca de la Aplicacion" BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnAcercaDe" Clicked="btnAcercaDe_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>

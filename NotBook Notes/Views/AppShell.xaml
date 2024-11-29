@@ -19,7 +19,7 @@
                    FontSize="20"
                    HorizontalOptions="Center"/>
             <Label Text="Plasma tus sueños... Y fechas; sabemos que eres olvidadizo"
-                   FontSize="11"
+                   FontSize="12"
                    HorizontalOptions="Center"
                    Padding="10"
                    Margin="0,0,0,20"/>
@@ -48,9 +48,14 @@
                    Route="VerNotas"/>
     </FlyoutItem>
 
+    <FlyoutItem Title="Configuración" Icon="opciones.svg">
+        <ShellContent ContentTemplate="{DataTemplate local:Opciones}" 
+                  Route="Opciones"/>
+    </FlyoutItem>
+
     <Shell.FlyoutFooter>
-        <Label Text="Profe denos el 20"
+        <Label Text="Hecho con &lt;?3 y mucha cafeina"
                HorizontalOptions="Center"
-               FontSize="12"/>
+               FontSize="15"/>
     </Shell.FlyoutFooter>
 </Shell>
