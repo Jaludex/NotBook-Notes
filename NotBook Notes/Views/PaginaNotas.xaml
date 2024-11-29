@@ -4,19 +4,18 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="NotBook_Notes.Views.PaginaNotas"
              Title="Notas">
-
+<ScrollView>
     <VerticalStackLayout>
 
         <Frame
         BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
         BorderColor="Transparent"
-        Margin="10"
+        Margin="20"
         Padding="10,5"
-        CornerRadius="25"
-        >
+        CornerRadius="10">
             <HorizontalStackLayout>
                 <Image Source="lupa.svg"
-           HeightRequest="30"
+           HeightRequest="25"
            Margin="0,0,10,0"/>
 
 
@@ -35,46 +34,69 @@
 
         <Button 
             Text="+ Nueva Nota"
-            HeightRequest="60"
+            HeightRequest="50"
             FontSize="20"
             FontAttributes="Bold"
             TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
             HorizontalOptions="FillAndExpand"
             BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
-            Margin="30,20"
-            Clicked="BtnNuevaNota_Clicked"/>
-            
-         
-
-        <ImageButton Source="ordenar.svg"
-                     HeightRequest="40"
-                     WidthRequest="40"
-                     Padding="5"
-                     CornerRadius="50"
-                     HorizontalOptions="End"
-                     Margin="0,0,30,0"
-                     />
-            
+            Margin="20,-9"
+            Clicked="BtnNuevaNota_Clicked"/>  
         
-        <Label Text="Aqui iran las notas"
-               HorizontalOptions="Center"/>
+        <FlexLayout 
+                    Direction="Row" 
+                    JustifyContent="SpaceBetween" 
+                    AlignItems="Center" 
+                    Padding="10"
+                    HeightRequest="100">
 
-        <!--Prueba 1.2 del DataBinding-->
+                    <!-- Label a la izquierda -->
+                    <Label Text="Notas" 
+                   FontSize="24" 
+                   Margin="10,10,0,0" />     
 
-        <CollectionView ItemsSource="{Binding Notas}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Titulo}" FontSize="24"/>
-                        <Label Text="{Binding Contenido}" FontSize="24"/>
-                        <Label Text="{Binding Categoria}" FontSize="24"/>
-                        <Label Text="{Binding FechaCreacion}" FontSize="24"/>
-                        <Button Text="Un botón que hará algo luego"
-                        Command="{Binding Command}" />
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                    <!-- ImageButton a la derecha -->
+                    <ImageButton 
+                    Source="ordenar.svg"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    CornerRadius="100"
+                    Margin="10,10,10,0" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="End"
+                        />  
+                </FlexLayout>
+
+
+    <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <!-- CollectionView con el contenido principal -->
+                    <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="Gray" Padding="20" Margin="10,10,10,0" HorizontalOptions="FillAndExpand">
+                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Titulo}" FontSize="18" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding Categoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding Contenido}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </StackLayout>
+
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
+
+
+<!--<Label Text="{Binding Titulo}" FontSize="24"/>
+<Label Text="{Binding Contenido}" FontSize="24"/>
+<Label Text="{Binding Categoria}" FontSize="24"/>
+<Label Text="{Binding FechaCreacion}" FontSize="24"/>
+<Button Text="Un botón que hará algo luego"
+                         Command="{Binding Command}" />-->
