@@ -58,17 +58,22 @@
         <Label Text="Aqui iran las notas"
                HorizontalOptions="Center"/>
 
-        <!--Prueba 1.1 del DataBinding-->
-        <StackLayout Padding="20">
-            <Label Text="Título de la Nota" FontSize="20" HorizontalOptions="Center" />
-            <Label Text="{Binding Nota.Titulo}" FontSize="24" HorizontalOptions="Center" />
+        <!--Prueba 1.2 del DataBinding-->
 
-            <Label Text="Contenido de la Nota" FontSize="20" HorizontalOptions="Center" />
-            <Label Text="{Binding Nota.Contenido}" FontSize="20" HorizontalOptions="Center" />
-
-            <Button Text="Cambiar Título"
-                Command="{Binding CambiarTituloCommand}" />
-        </StackLayout>
+        <CollectionView ItemsSource="{Binding Notas}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Titulo}" FontSize="24"/>
+                        <Label Text="{Binding Contenido}" FontSize="24"/>
+                        <Label Text="{Binding Categoria}" FontSize="24"/>
+                        <Label Text="{Binding FechaCreacion}" FontSize="24"/>
+                        <Button Text="Un botón que hará algo luego"
+                        Command="{Binding Command}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 </ContentPage>
