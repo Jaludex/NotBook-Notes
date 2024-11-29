@@ -15,6 +15,7 @@ namespace NotBook_Notes.Models
     {
         public static List<Categoria> categorias;
         public static NotaViewModel notaViewModel = new NotaViewModel();
+        public static NotaViewModel papeleraViewModel = new NotaViewModel();
         public static List<string> frasesBonitas = new List<string>();
         public static string nombreUsuario;
 
@@ -146,6 +147,8 @@ namespace NotBook_Notes.Models
     {
         public List<Nota> notasModelo;
         public List<Recordatorio> recordatoriosModelo;
+        public List<Nota> papeleraNotaModelo;
+        public List<Recordatorio> papeleraRecordatoriosModelo;
         public List<Categoria> categoriasModelo;
         public List<string> frasesBonitasModelo;
         public string nombreUsuarioModelo;
