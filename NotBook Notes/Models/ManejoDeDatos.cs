@@ -104,13 +104,12 @@ namespace NotBook_Notes.Models
 
                 // Guardar el JSON en el archivo
                 await File.WriteAllTextAsync(ruta, json);
-                Console.WriteLine(ruta + "pito");
 
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Aqui estooooy" + ex.ToString());
+                Console.WriteLine(ex.ToString());
             }
         }
 
