@@ -13,7 +13,7 @@ public partial class VerNotas : ContentPage
 	bool esRecordatorio;
     bool esEdicion;
 	DateTime? fechaLimite;
-    int categoriaObjetivo;
+    string categoriaObjetivo;
     int aEditar;
 
     public VerNotas(bool esRecordatorio)
@@ -56,7 +56,7 @@ public partial class VerNotas : ContentPage
             TituloEditor.Text = seleccionada.Titulo;
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
-            CategoriaPicker.SelectedIndex = seleccionada.Categoria;
+            CategoriaPicker.SelectedIndex = ManejoDeDatos.categorias.FindIndex(u => u.NombreCategoría == categoriaObjetivo);
 
             if (esRecordatorio)
             {
@@ -69,12 +69,12 @@ public partial class VerNotas : ContentPage
                 }
                 fechaLimite = Rseleccionada.fechaLimite;
                 DateTimeEntry.Text = fechaLimite.Value.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
-                this.Title = "Editar Recordatorio";
+                this.Title = "Ver/Editar Recordatorio";
                 FrameRecordatorio.IsVisible = true;
             }
             else
             {
-                this.Title = "Editar Nota";
+                this.Title = "Ver/Editar Nota";
             }
         }
 
@@ -82,73 +82,81 @@ public partial class VerNotas : ContentPage
 
     private async void BtnGuardarNota_Clicked(object sender, EventArgs e)
     {
-        string titulo = TituloEditor.Text;
-        //Minimo un titulo
-        if (string.IsNullOrWhiteSpace(titulo) || ManejoDeDatos.notaViewModel.EncontrarNota(titulo) != -1)
+        try
         {
-            IToast mensaje = Toast.Make("Introduzca un titulo valido");
-            await mensaje.Show();
-            return;
-        }
-
-        //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
-        if (esEdicion)
-        {
-            if (!esRecordatorio)
+            string titulo = TituloEditor.Text;
+            //Minimo un titulo
+            if (string.IsNullOrWhiteSpace(titulo))
             {
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, categoriaObjetivo);
-                ManejoDeDatos.notaViewModel.notas[aEditar] = nuevaNota;
-                ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
-                //Cambio esto al momento para asegurar que se llame al property changed
-
-                IToast mensaje = Toast.Make("Nota Guardada");
-                await mensaje.Show();
-            }
-            else if (fechaLimite.HasValue)
-            {
-                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
-                ManejoDeDatos.notaViewModel.notas[aEditar] = nuevoRecordatorio;
-                ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
-
-                //Aqui llamamos a quitar la notificacion anterior y colocar la que tiene la nueva fecha limite
-                IToast mensaje = Toast.Make("Recordatorio Guardado");
-                await mensaje.Show();
-            }
-            else
-            {
-                IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
+                IToast mensaje = Toast.Make("Introduzca un titulo valido");
                 await mensaje.Show();
                 return;
             }
-        }
-        //Es de creacion
-        else
-        {
-            if (!esRecordatorio)
+
+            //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
+            if (esEdicion)
             {
-                //Creamos una nota comun
-                Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
-                ManejoDeDatos.notaViewModel.notas.Add(nuevaNota);
-                IToast mensaje = Toast.Make("Nota Creada");
-                await mensaje.Show();
-                await Navigation.PopAsync();
+                if (!esRecordatorio)
+                {
+                    Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, categoriaObjetivo);
+                    ManejoDeDatos.notaViewModel.notas[aEditar] = nuevaNota;
+                    ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
+                    //Cambio esto al momento para asegurar que se llame al property changed
+
+                    IToast mensaje = Toast.Make("Nota Guardada");
+                    await mensaje.Show();
+                }
+                else if (fechaLimite.HasValue)
+                {
+                    Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
+                    ManejoDeDatos.notaViewModel.notas[aEditar] = nuevoRecordatorio;
+                    ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
+
+                    //Aqui llamamos a quitar la notificacion anterior y colocar la que tiene la nueva fecha limite
+                    IToast mensaje = Toast.Make("Recordatorio Guardado");
+                    await mensaje.Show();
+                }
+                else
+                {
+                    IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
+                    await mensaje.Show();
+                    return;
+                }
             }
-            else if (fechaLimite.HasValue)
-            {
-                //Creamos un recordatorio
-                Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
-                ManejoDeDatos.notaViewModel.notas.Add(nuevoRecordatorio);
-                //llamamos a establecer la notificion correspondiente
-                IToast mensaje = Toast.Make("Recordatorio Creado");
-                await mensaje.Show();
-                await Navigation.PopAsync();
-            }
+            //Es de creacion
             else
             {
-                IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
-                await mensaje.Show();
-                return;
+                if (!esRecordatorio)
+                {
+                    //Creamos una nota comun
+                    Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, DateTime.Now, categoriaObjetivo);
+                    ManejoDeDatos.notaViewModel.AddNota(nuevaNota);
+                    IToast mensaje = Toast.Make("Nota Creada");
+                    await mensaje.Show();
+                    await Navigation.PopAsync();
+                }
+                else if (fechaLimite.HasValue)
+                {
+                    //Creamos un recordatorio
+                    Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
+                    ManejoDeDatos.notaViewModel.AddNota(nuevoRecordatorio);
+                    //llamamos a establecer la notificion correspondiente
+                    IToast mensaje = Toast.Make("Recordatorio Creado");
+                    await mensaje.Show();
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    IToast mensaje = Toast.Make("Introduzca una Fecha Valida");
+                    await mensaje.Show();
+                    return;
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.ToString(), "Volver");
+            await Navigation.PopAsync();
         }
 
     }
@@ -221,7 +229,7 @@ public partial class VerNotas : ContentPage
             // Cambiar el color del BoxView al de la categoría seleccionada
             ColorBoxView.BackgroundColor = colorSeleccionado;
 
-            categoriaObjetivo = selectedIndex;
+            categoriaObjetivo = categoriaSeleccionada;
         }
     }
 

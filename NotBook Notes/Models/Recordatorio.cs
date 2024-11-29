@@ -26,7 +26,7 @@ namespace NotBook_Notes.Models
         }
 
 
-        public Recordatorio(string Titulo, string Contentido, DateTime FechaCreacion, DateTime FechaLimite, int categoria) : base(Titulo, Contentido, FechaCreacion, categoria)
+        public Recordatorio(string Titulo, string Contentido, DateTime FechaCreacion, DateTime FechaLimite, string categoria) : base(Titulo, Contentido, FechaCreacion, categoria)
         {
             this.fechaLimite = FechaLimite;
         }

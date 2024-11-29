@@ -51,7 +51,7 @@
                     HeightRequest="100">
 
                     <!-- Label a la izquierda -->
-                    <Label Text="Notas" 
+                    <Label Text="Nota" 
                    FontSize="24" 
                    Margin="10,10,0,0" />     
 
@@ -71,11 +71,17 @@
     <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
                 <!-- CollectionView con el contenido principal -->
-                    <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="NotaCollectionView">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BorderColor="Gray" Padding="20" Margin="10,10,10,0" HorizontalOptions="FillAndExpand">
-                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                <Frame BorderColor="Gray" Padding="20" Margin="10,10,10,0" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource White}}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={x:Reference NotaCollectionView}, Path=BindingContext.OpcionesNotaCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                    <!-- Pasa la nota completa -->
+                                </Frame.GestureRecognizers>
+                                <StackLayout HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding Titulo}" FontSize="18" HorizontalOptions="FillAndExpand"/>
                                         <Label Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
                                         <Label Text="{Binding Categoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
