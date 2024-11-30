@@ -15,7 +15,7 @@
                 CornerRadius="10">
 
                 <HorizontalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
-                    <Image Source="lupa.svg"
+                <Image Source="lupa.svg"
                             HeightRequest="25"
                             Margin="0,0,10,0"/>
 
@@ -29,6 +29,7 @@
                     VerticalOptions="Center"
                     TextChanged="textoBusqueda_TextChanged"
                     x:Name="textoBusqueda"/>
+                </HorizontalStackLayout>
 
             </Frame>
 
