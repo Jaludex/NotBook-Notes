@@ -97,8 +97,8 @@ namespace NotBook_Notes.Models
                 {
                     notasModelo = notasAGuardar,
                     recordatoriosModelo = recordsAGuardar,
-                    categoriasModelo = categorias, // Asegúrate de que `categorias` esté definida
-                    frasesBonitasModelo = frasesBonitas, // Asegúrate de que `frasesBonitas` esté definida
+                    categoriasModelo = categorias,
+                    frasesBonitasModelo = frasesBonitas,
                     nombreUsuarioModelo = nombreUsuario,
                     cantidadNotificacionesModelo = cantidadNotificaciones
                 };
@@ -143,17 +143,6 @@ namespace NotBook_Notes.Models
         }
     
 
-        //Aqui puedo dejar a la clase plantilla para recibir de los json
-        public class PlantillaDatosJson
-        {
-            public List<Nota> notasModelo;
-            public List<Recordatorio> recordatoriosModelo;
-            public List<Categoria> categoriasModelo;
-            public List<string> frasesBonitasModelo;
-            public string nombreUsuarioModelo;
-            public int cantidadNotificacionesModelo;
-        }
-
     public static bool Filtrar(string aBuscar, string NotaORecordatorio)
     {
             var resultado = ManejoDeDatos.notaViewModel.Filtrar(aBuscar,NotaORecordatorio);
@@ -168,6 +157,17 @@ namespace NotBook_Notes.Models
             }
             return true;
         }
+    }
+
+    //Aqui puedo dejar a la clase plantilla para recibir de los json
+    public class PlantillaDatosJson
+    {
+        public List<Nota> notasModelo;
+        public List<Recordatorio> recordatoriosModelo;
+        public List<Categoria> categoriasModelo;
+        public List<string> frasesBonitasModelo;
+        public string nombreUsuarioModelo;
+        public int cantidadNotificacionesModelo;
     }
 
 }

@@ -102,7 +102,7 @@ public partial class PaginaNotas : ContentPage
         {
             filtroCategoria = null;
 
-            btnFiltroCategoria.Color = Colors.Transparent;
+            btnFiltroCategoria.Color = Colors.White;
             //Cuadro de sin filtro
             //Llamar a filtrar sin criterio de categoria
             return;

@@ -45,25 +45,39 @@
             Clicked="BtnNuevoRecordatorio_Clicked"/>
 
             <FlexLayout 
-                    Direction="Row" 
-                    JustifyContent="SpaceBetween" 
-                    AlignItems="Center" 
-                    Padding="10"
-                    HeightRequest="100">
+            Direction="Row" 
+            JustifyContent="SpaceEvenly" 
+            AlignItems="Center" 
+            Padding="10"
+            HeightRequest="100">
 
-                <Label Text="Recordatorios" 
-                       FontSize="24" 
-                       Margin="10,10,0,0" />
+                <!-- Label a la izquierda -->
+                <BoxView x:Name="btnFiltroCategoria" WidthRequest="40" HeightRequest="40"
+                            CornerRadius="10" BackgroundColor="White" 
+                            VerticalOptions="Center">
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </BoxView.GestureRecognizers>
+                </BoxView>
 
-                <ImageButton 
-                        Source="ordenar.svg"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        CornerRadius="50"
-                        Margin="10,10,10,0" 
-                        Padding="5"
-                        VerticalOptions="Center" 
-                        HorizontalOptions="End"/>
+                <Button x:Name="btnCriterio"
+                        Text="Descendente"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
+                        WidthRequest="100"
+                        Clicked="btnCriterio_Clicked"/>
+
+
+
+                <!-- ImageButton a la derecha -->
+                <ImageButton x:Name="btnOrdenarNotas"
+                            Clicked="btnOrdenarNotas_Clicked"
+                            Source="ordenar.svg"
+                            HeightRequest="30"
+                            WidthRequest="30"
+                            CornerRadius="100"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="End"
+                />
             </FlexLayout>
 
             <Label 
