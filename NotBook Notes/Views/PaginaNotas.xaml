@@ -7,16 +7,17 @@
 <ScrollView>
     <VerticalStackLayout>
 
-        <Frame
-        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
-        BorderColor="Transparent"
-        Margin="20"
-        Padding="10,5"
-        CornerRadius="10">
-            <HorizontalStackLayout>
-                <Image Source="lupa.svg"
-           HeightRequest="25"
-           Margin="0,0,10,0"/>
+            <Frame
+                BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
+                BorderColor="Transparent"
+                Margin="20"
+                Padding="10,5"
+                CornerRadius="10">
+
+                <HorizontalStackLayout HorizontalOptions="Fill" VerticalOptions="Center">
+                    <Image Source="lupa.svg"
+                            HeightRequest="25"
+                            Margin="0,0,10,0"/>
 
                     
 
@@ -29,12 +30,12 @@
                     TextChanged="textoBusqueda_TextChanged"
                     x:Name="textoBusqueda"/>
 
-            </HorizontalStackLayout>
-        </Frame>
+            </Frame>
 
 
 
-        <Button 
+
+            <Button 
             Text="+ Nueva Nota"
             HeightRequest="50"
             FontSize="20"

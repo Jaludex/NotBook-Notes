@@ -22,6 +22,7 @@ namespace NotBook_Notes.Views
                 Rutas.Add(nameof(PaginaRecordatorios), typeof(PaginaRecordatorios));
                 Rutas.Add(nameof(VerNotas), typeof(VerNotas));
                 Rutas.Add(nameof(Papelera), typeof(Papelera));
+                Rutas.Add(nameof(Opciones), typeof(Opciones));
 
                 foreach (var ruta in Rutas)
                 {

@@ -43,6 +43,8 @@ public partial class VerNotas : ContentPage
         //Aqui coloco el titulo que va acorde al contexto, el default ya es crear nota asi que ese caso me lo salto
         if (!esEdicion)
         {
+                    CategoriaPicker.SelectedIndex = 0;
+        ColorBoxView.BackgroundColor = ManejoDeDatos.categorias[0].ColorNotas;
             LabelFechaCreacion.Text = "Creación: " + DateTime.Now.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             if (esRecordatorio)
             {
@@ -57,7 +59,9 @@ public partial class VerNotas : ContentPage
             LabelFechaCreacion.Text = "Edición: " + seleccionada.FechaCreacion.ToString("dddd, dd 'de' MMM yyyy hh:mm tt");
             TxtNota.Text = seleccionada.Contenido;
             Console.WriteLine(seleccionada.Categoria.NombreCategoria + "sexo");
-            CategoriaPicker.SelectedIndex = ManejoDeDatos.categorias.IndexOf(seleccionada.Categoria);
+            CategoriaPicker.SelectedItem = seleccionada.Categoria.NombreCategoria;
+            categoriaObjetivo = seleccionada.Categoria;
+            ColorBoxView.BackgroundColor = seleccionada.Categoria.ColorNotas;
             btnBorrar.IsVisible = true;
 
             if (esRecordatorio)
@@ -223,9 +227,6 @@ public partial class VerNotas : ContentPage
         {
             CategoriaPicker.Items.Add(categoria.NombreCategoria);
         }
-
-        CategoriaPicker.SelectedIndex = 0;
-        ColorBoxView.BackgroundColor = ManejoDeDatos.categorias[0].ColorNotas;
     }
 
     private void OnColorBoxTapped(object sender, EventArgs e)

@@ -26,7 +26,6 @@ public partial class PaginaNotas : ContentPage
     protected override void OnAppearing() // Este método se llama cada vez que la página está a punto de aparecer.
     {
         base.OnAppearing();
-        Console.WriteLine("NotasPage se está apareciendo."); // Esto debería aparecer en la consola
         string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
         ManejoDeDatos.GuardarDatosJSONAsync(ruta);
         // esto es para que aparezcan todas las notas apenas abrimos la app

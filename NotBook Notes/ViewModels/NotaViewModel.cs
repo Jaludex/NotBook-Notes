@@ -159,7 +159,6 @@ namespace NotBook_Notes.ViewModels
             {
                 notas.Remove(notaSeleccionada);
                 // Aquí puedes agregar lógica adicional como guardar cambios en la base de datos.
-                Console.WriteLine($"Nota eliminada: {notaSeleccionada.Titulo}");
                 string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
                 ManejoDeDatos.GuardarDatosJSONAsync(ruta);
             }
@@ -174,7 +173,6 @@ namespace NotBook_Notes.ViewModels
                 notas.Remove(notaSeleccionada); // Eliminar de la papelera
                                                 // Agregar a la colección de notas activos si tienes uno
                 ManejoDeDatos.notaViewModel.AddNota(notaSeleccionada); // Ajusta según tu lógica
-                Console.WriteLine($"Nota restaurada: {notaSeleccionada.Titulo}");
                 string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
                 ManejoDeDatos.GuardarDatosJSONAsync(ruta);
             }
