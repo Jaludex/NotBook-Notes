@@ -172,10 +172,11 @@ namespace NotBook_Notes.ViewModels
         {
             if (notaSeleccionada != null)
             {
-                // Aquí puedes implementar la lógica para restaurar la nota
-                // Por ejemplo, agregarla a la lista de notas activas
-                notas.Remove(notaSeleccionada); // Eliminar de la papelera
-                                                // Agregar a la colección de notas activos si tienes uno
+                if (notaSeleccionada is Recordatorio record)
+                {
+                    ManejoNotificaciones.CrearNotificacion(record);
+                }
+                notas.Remove(notaSeleccionada);
                 ManejoDeDatos.notaViewModel.AddNota(notaSeleccionada); // Ajusta según tu lógica
                 string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
                 ManejoDeDatos.GuardarDatosJSONAsync(ruta);

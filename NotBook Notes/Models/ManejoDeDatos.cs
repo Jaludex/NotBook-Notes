@@ -18,6 +18,7 @@ namespace NotBook_Notes.Models
         public static NotaViewModel papeleraViewModel = new NotaViewModel();
         public static List<string> frasesBonitas = new List<string>();
         public static string nombreUsuario;
+        public static int cantidadNotificaciones;
 
 
         //Puede usar la ruta default o una ruta donde se haya guardado un respaldo de las notas y configuraciones
@@ -52,6 +53,7 @@ namespace NotBook_Notes.Models
                 categorias.AddRange(datos.categoriasModelo);
                 frasesBonitas.AddRange(datos.frasesBonitasModelo);
                 nombreUsuario = datos.nombreUsuarioModelo;
+                cantidadNotificaciones = datos.cantidadNotificacionesModelo;
 
                 return true;
             }
@@ -97,7 +99,8 @@ namespace NotBook_Notes.Models
                     recordatoriosModelo = recordsAGuardar,
                     categoriasModelo = categorias, // Asegúrate de que `categorias` esté definida
                     frasesBonitasModelo = frasesBonitas, // Asegúrate de que `frasesBonitas` esté definida
-                    nombreUsuarioModelo = nombreUsuario
+                    nombreUsuarioModelo = nombreUsuario,
+                    cantidadNotificacionesModelo = cantidadNotificaciones
                 };
 
                 string json = JsonConvert.SerializeObject(datos, Formatting.Indented);
@@ -148,6 +151,7 @@ namespace NotBook_Notes.Models
             public List<Categoria> categoriasModelo;
             public List<string> frasesBonitasModelo;
             public string nombreUsuarioModelo;
+            public int cantidadNotificacionesModelo;
         }
 
         public static bool FiltrarNotas(string aBuscar)
