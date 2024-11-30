@@ -10,16 +10,13 @@ using CommunityToolkit.Maui.Views;
 public partial class PaginaNotas : ContentPage
 {
     MenuPopup menuPopupOrganizar;
-    bool descendente;
-    Categoria? filtroCategoria;
 
 	public PaginaNotas()
 	{
 		InitializeComponent();
         InitializeMenuPopup();
-        descendente = true;
-        filtroCategoria = null;
         BindingContext = ManejoDeDatos.notaViewModel;
+        
     }
 
     private void InitializeMenuPopup()
@@ -50,6 +47,7 @@ public partial class PaginaNotas : ContentPage
         {
             noSeEncontro.IsVisible = false;
         }
+        ManejoDeDatos.OrdenarPorNombreOFecha();
         ManejoDeDatos.notaViewModel.ActualizarNotas();
     }
 
@@ -68,6 +66,7 @@ public partial class PaginaNotas : ContentPage
     private async void btnOrdenarNotas_Clicked(object sender, EventArgs e)
     {
         await PopupExtensions.ShowPopupAsync<MenuPopup>(this, menuPopupOrganizar);
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
 
         //Llama a filtrar vacio, que saliendo de aqui ya deberia de estar ordenado, o si no, pues que lo haga y quede como estaba
 
@@ -75,32 +74,27 @@ public partial class PaginaNotas : ContentPage
         menuPopupOrganizar = new MenuPopup();
     }
 
-
-    //Toma la coleccion que ya se filtro con los metodo anteriores, nada mas que la ordena de acuerdo al criterio
-    private void OrdenarNotas(string criterio, bool orden)
-    {
-        // Implementar la lógica para ordenar las notas
-    }
-
     private void btnCriterio_Clicked(object sender, EventArgs e)
     {
-        descendente = (descendente == false);
+        ManejoDeDatos.esDescendente = (ManejoDeDatos.esDescendente == false);
 
-        if (descendente) { btnCriterio.Text = "Descendente"; }
+        if (ManejoDeDatos.esDescendente) { btnCriterio.Text = "Descendente";}
         else { btnCriterio.Text = "Ascendente"; }
+        ManejoDeDatos.OrdenarPorNombreOFecha();
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
 
-        //Aqui llamamos a ordenar de nuevo, diciendole con la variable si se ordena desdecente o ascendente
+        //Aqui llamamos a ordenar de nuevo, diciendole con la variable si se ordena descendente o ascendente
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        if (filtroCategoria == null)
+        if (ManejoDeDatos.filtroCategoria == null)
         {
-            filtroCategoria = ManejoDeDatos.categorias[0];
+            ManejoDeDatos.filtroCategoria = ManejoDeDatos.categorias[0];
         }
-        else if (filtroCategoria == ManejoDeDatos.categorias.Last())
+        else if (ManejoDeDatos.filtroCategoria == ManejoDeDatos.categorias.Last())
         {
-            filtroCategoria = null;
+            ManejoDeDatos.filtroCategoria = null;
 
             btnFiltroCategoria.Color = Colors.Transparent;
             //Cuadro de sin filtro
@@ -109,10 +103,12 @@ public partial class PaginaNotas : ContentPage
         }
         else
         {
-            filtroCategoria = ManejoDeDatos.categorias[ManejoDeDatos.categorias.IndexOf(filtroCategoria) + 1];
+            ManejoDeDatos.filtroCategoria = ManejoDeDatos.categorias[ManejoDeDatos.categorias.IndexOf(ManejoDeDatos.filtroCategoria) + 1];
         }
 
-        btnFiltroCategoria.Color = filtroCategoria.ColorNotas;
+        btnFiltroCategoria.Color = ManejoDeDatos.filtroCategoria.ColorNotas;
+        ManejoDeDatos.OrdenarPorNombreOFecha();
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
 
         //Cuadro de filtrando por X categoria
         //Llamar a filtrar con ese criterio

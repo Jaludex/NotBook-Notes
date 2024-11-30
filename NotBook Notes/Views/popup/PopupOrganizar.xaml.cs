@@ -2,6 +2,8 @@ using CommunityToolkit.Maui.Views;
 using System;
 using Microsoft.Maui.Controls;
 using CommunityToolkit.Maui.Views;
+using NotBook_Notes.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NotBook_Notes.Views
 {
@@ -19,18 +21,23 @@ namespace NotBook_Notes.Views
         private void OnOrdenarPorNombreClicked(object sender, EventArgs e)
         {
             // Lógica para ordenar por nombre
+            ManejoDeDatos.ordenSeleccionado = "Nombre";
+            ManejoDeDatos.OrdenarPorNombreOFecha();
             Close();
         }
 
         private void OnOrdenarPorFechaClicked(object sender, EventArgs e)
         {
             // Lógica para ordenar por fecha
+            ManejoDeDatos.ordenSeleccionado = "Fecha";
+            ManejoDeDatos.OrdenarPorNombreOFecha();
             Close();
-        }
-
-        private void OnFiltrarPorCategoriaClicked(object sender, EventArgs e)
+        }        
+        
+        private void Opcion3_Clicked(object sender, EventArgs e)
         {
-            // Lógica para filtrar por categoría
+            ManejoDeDatos.ordenSeleccionado = "FechaLimite";
+            ManejoDeDatos.OrdenarPorNombreOFecha();
             Close();
         }
 
@@ -38,5 +45,7 @@ namespace NotBook_Notes.Views
         {
             Close();
         }
+
+
     }
 }

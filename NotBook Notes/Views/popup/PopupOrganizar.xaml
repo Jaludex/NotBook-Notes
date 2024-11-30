@@ -7,9 +7,9 @@
     <StackLayout Padding="10" WidthRequest="300" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"  >
         <Label Text="Selecciona una opción:" FontAttributes="Bold" />
 
-        <Button Text="Ordenar por Nombre" Clicked="OnOrdenarPorNombreClicked" BackgroundColor="Transparent"  TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
-        <Button Text="Ordenar por Fecha de Edicion" Clicked="OnOrdenarPorFechaClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
-        <Button Text="Ordenar por Fecha Limite" IsVisible="False" Clicked="OnOrdenarPorFechaClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+        <Button Text="Ordenar por Nombre" x:Name="Opcion1" AutomationId="Nombre" Clicked="OnOrdenarPorNombreClicked" BackgroundColor="Transparent"  TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+        <Button Text="Ordenar por Fecha de Edicion" x:Name="Opcion2" AutomationId="Fecha" Clicked="OnOrdenarPorFechaClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+        <Button Text="Ordenar por Fecha Limite" x:Name="Opcion3" AutomationId="FechaEdicion" IsVisible="False" Clicked="Opcion3_Clicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
 
         <Button Text="Cancelar" Clicked="OnCloseClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
     </StackLayout>

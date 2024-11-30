@@ -19,6 +19,9 @@ namespace NotBook_Notes.Models
         public static List<string> frasesBonitas = new List<string>();
         public static string nombreUsuario;
         public static int cantidadNotificaciones;
+        public static bool esDescendente = true; // true descendente, false ascendente
+        public static string ordenSeleccionado = "Fecha"; // 1 es por fecha, 0 nombre, 2 es fecha limite
+        public static Categoria? filtroCategoria; //si es null, significa que no hay filtro
 
 
         //Puede usar la ruta default o una ruta donde se haya guardado un respaldo de las notas y configuraciones
@@ -155,10 +158,15 @@ namespace NotBook_Notes.Models
         }
 
     public static bool Filtrar(string aBuscar, string NotaORecordatorio)
-    {
+        {
             var resultado = ManejoDeDatos.notaViewModel.Filtrar(aBuscar,NotaORecordatorio);
             return resultado;
-    }
+        }
+
+    public static void OrdenarPorNombreOFecha()
+        {
+            ManejoDeDatos.notaViewModel.OrdenarPorNombreOFecha(ordenSeleccionado, esDescendente, filtroCategoria);
+        }
 
     public static bool SwitchBooleano(bool variable)
         {

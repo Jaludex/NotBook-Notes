@@ -152,6 +152,65 @@ namespace NotBook_Notes.ViewModels
             }
         }
 
+        // falta esto
+        public void OrdenarPorCategoria(string criterioBusqueda)
+        {
+            
+        }
+
+        public bool OrdenarPorNombreOFecha(string NombreOFecha, bool esDescendente, Categoria? categoria)
+        {
+            // Validar que el criterio de ordenación no sea nulo o vacío
+            if (string.IsNullOrEmpty(NombreOFecha))
+            {
+                Console.WriteLine("El criterio de ordenación no puede ser nulo o vacío.");
+                return false; // Retorna false si falla
+            }
+
+            // Filtrar las notas por categoría si se proporciona una
+            IEnumerable<Nota> notasFiltradasPorCategoria = categoria != null
+                ? notas.Where(n => n.Categoria != null && n.Categoria.NombreCategoria == categoria.NombreCategoria)
+                : notas;
+
+            // Seleccionar la clave de ordenación (Titulo, FechaCreacion o FechaLimite)
+            Func<Nota, object>? keySelector = NombreOFecha switch
+            {
+                "Nombre" => n => n.Titulo,
+                "Fecha" => n => n.FechaCreacion,
+                "FechaLimite" => n => (n is Recordatorio recordatorio ? recordatorio.fechaLimite : null),
+                _ => null // Devuelve null si el criterio no es válido
+            };
+
+            if (keySelector == null)
+            {
+                Console.WriteLine("Criterio de ordenación no válido. Use 'Nombre', 'Fecha' o 'FechaLimite'.");
+                return false;
+            }
+
+            // Si el criterio es FechaLimite, verificar que todas las notas sean de tipo Recordatorio
+            if (NombreOFecha == "FechaLimite" && notasFiltradasPorCategoria.Any(n => n is not Recordatorio))
+            {
+                Console.WriteLine("No se puede ordenar por FechaLimite si no todas las notas son recordatorios.");
+                return false;
+            }
+
+            // Aplicar el orden ascendente o descendente
+            IEnumerable<Nota> notasOrdenadas = esDescendente
+                ? notasFiltradasPorCategoria.OrderByDescending(keySelector)
+                : notasFiltradasPorCategoria.OrderBy(keySelector);
+
+            // Actualizar la colección observable
+            notasFiltradas = new ObservableCollection<Nota>(notasOrdenadas);
+
+            return true; // Retorna true si todo fue exitoso
+        }
+
+
+        public void OrdenarPo(string criterioBusqueda)
+        {
+
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
