@@ -10,7 +10,6 @@ public partial class PaginaNotas : ContentPage
 	public PaginaNotas()
 	{
 		InitializeComponent();
-
         BindingContext = ManejoDeDatos.notaViewModel;
     }
 
@@ -29,20 +28,20 @@ public partial class PaginaNotas : ContentPage
         string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
         ManejoDeDatos.GuardarDatosJSONAsync(ruta);
         // esto es para que aparezcan todas las notas apenas abrimos la app
-        if (ManejoDeDatos.FiltrarNotas(""))
+        if (ManejoDeDatos.Filtrar("", textoBusqueda.AutomationId))
         {
             noSeEncontro.IsVisible = false;
         }
         else
         {
-            noSeEncontro.IsVisible = true;
+            noSeEncontro.IsVisible = false;
         }
         ManejoDeDatos.notaViewModel.ActualizarNotas();
     }
 
     private void textoBusqueda_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (ManejoDeDatos.FiltrarNotas(textoBusqueda.Text))
+        if (ManejoDeDatos.Filtrar(textoBusqueda.Text, textoBusqueda.AutomationId))
         {
             noSeEncontro.IsVisible = true;
             //solo queremos mostrar los elementos coincidentes

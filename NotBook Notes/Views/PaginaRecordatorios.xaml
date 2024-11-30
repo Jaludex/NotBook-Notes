@@ -3,56 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotBook_Notes.Views.PaginaRecordatorios"
              Title="Recordatorios">
-    <VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
 
-        <Frame
+            <Frame
                 BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
                 BorderColor="Transparent"
-                Margin="10"
+                Margin="20"
                 Padding="10,5"
-                CornerRadius="25"
-                >
-            <HorizontalStackLayout>
-                <Image Source="lupa.svg"
-                   HeightRequest="30"
-                   Margin="0,0,10,0"/>
+                CornerRadius="10">
+                    <HorizontalStackLayout>
+                        <Image Source="lupa.svg"
+                                    HeightRequest="25"
+                                    Margin="0,0,10,0"/>
+
+                        <Entry
+                           Placeholder="Frase Bonita aleatoria..."
+                           x:Name="textoBusqueda"
+                           AutomationId="Recordatorio"
+                           FontAttributes="Bold"
+                           ClearButtonVisibility="WhileEditing"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Center"
+                           WidthRequest="290"
+                           TextChanged="Entry_TextChanged"/>
+
+                    </HorizontalStackLayout>
+            </Frame>
 
 
-                <Entry
-                   Placeholder="Frase Bonita aleatoria..."
-                   FontAttributes="Bold"
-                   ClearButtonVisibility="WhileEditing"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="Center"
-                                            WidthRequest="270"/>
+            <Button 
+            x:Name="BtnNuevoRecordatorio"
+            Text="+ Nuevo Recordatorio"
+            HeightRequest="50"
+            FontSize="20"
+            FontAttributes="Bold"
+            TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
+            HorizontalOptions="FillAndExpand"
+            BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
+            Margin="20,-9"
+            Clicked="BtnNuevoRecordatorio_Clicked"/>
 
-            </HorizontalStackLayout>
-        </Frame>
+            <FlexLayout 
+                    Direction="Row" 
+                    JustifyContent="SpaceBetween" 
+                    AlignItems="Center" 
+                    Padding="10"
+                    HeightRequest="100">
 
+                <Label Text="Recordatorios" 
+                       FontSize="24" 
+                       Margin="10,10,0,0" />
 
-        <Button 
-        x:Name="BtnNuevoRecordatorio"
-        Text="+ Nuevo Recordatorio"
-        HeightRequest="60"
-        FontSize="20"
-        FontAttributes="Bold"
-        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
-        HorizontalOptions="FillAndExpand"
-        BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}"
-        Margin="30,20"
-        Clicked="BtnNuevoRecordatorio_Clicked"/>
+                <ImageButton 
+                        Source="ordenar.svg"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        CornerRadius="50"
+                        Margin="10,10,10,0" 
+                        Padding="5"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="End"/>
+            </FlexLayout>
 
-        <ImageButton Source="ordenar.svg"
-                 HeightRequest="40"
-                 WidthRequest="40"
-                 Padding="5"
-                 CornerRadius="50"
-                 HorizontalOptions="End"
-                 Margin="0,0,30,0"
-                 />
-        <Label Text="Aqui iran los recordatorios"
-               x:Name="labelrecord"
-           HorizontalOptions="Center"/>
+            <Label 
+                Text="¡Ups! Parece que no encontramos lo que buscabas..."
+                Margin="20,0,10,0" 
+                IsVisible="False"
+                FontSize="15"
+                x:Name="noSeEncontro"/>
 
-    </VerticalStackLayout>
+            <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                <!-- CollectionView con el contenido principal -->
+                <CollectionView ItemsSource="{Binding notasFiltradas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="NotaCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="Gray" Padding="-2" Margin="10,10,10,0" HorizontalOptions="FillAndExpand" BackgroundColor="{AppThemeBinding Dark={StaticResource OffBlack}, Light={StaticResource White}}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                         Command="{Binding Source={x:Reference NotaCollectionView}, Path=BindingContext.OpcionesNotaCommand}"
+                                         CommandParameter="{Binding .}"/>   
+                                    <!-- Pasa la nota completa -->
+                                </Frame.GestureRecognizers>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+
+                                    <Frame BackgroundColor="{Binding Categoria.ColorNotas}" HeightRequest="20" Padding="0" Margin="0" CornerRadius="0"/>
+
+                                    <Label Margin="20,10,20,0" Text="{Binding Titulo}" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,0" Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,0" Text="{Binding Categoria.NombreCategoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,20" Text="{Binding Contenido}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+        </VerticalStackLayout>
+        
+    </ScrollView>
+    
 </ContentPage>

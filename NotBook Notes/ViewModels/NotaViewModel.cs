@@ -80,15 +80,26 @@ namespace NotBook_Notes.ViewModels
         // Esto es para filtrar las notas según lo que se escriba en la barra de busqueda
         // retorna false cuando no hay notas que coincidan con la busqueda
        
-        public bool FiltrarNotas(string criterioBusqueda)
+        public bool Filtrar(string criterioBusqueda, string NotaORecordatorio)
         {
+            // Esto verifica si el buscador esta vacio, si lo esta ejecuta esto:
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
-                // Si no hay nada escrito en el criterio de búsqueda muestra todas las notas existentes
-                notasFiltradas = notas;
+                // Ahora verifica si estamos pidiendo notas, si es asi muestra todas las notas existentes asignandolas a la coleccion de notas filtradas
+                if(NotaORecordatorio == "Nota")
+                {
+                    notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => !(n is Recordatorio))); // Filtra solo las notas que no son de tipo Recordatorio;
+                }
+                else
+                // Si pedimos recordatorio entonces ve si hay algun recordatorio en notas y lo asigna a notas filtradas
+                {
+                    notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => n is Recordatorio));
+                }
+
                 if (notasFiltradas.Any())
                 {
                     return false;
+
                 } else
                 {
                     return true;
@@ -102,11 +113,21 @@ namespace NotBook_Notes.ViewModels
                 var resultado = new ObservableCollection<Nota>(
                     notas.Where(n =>
                         n.Titulo.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
-                        n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
+                        n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                        n.Categoria.NombreCategoria.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
                 );
+                // si es nota entonces filtra nada mas las notas
+                if(NotaORecordatorio == "Nota")
+                {
+                    notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => !(n is Recordatorio)));
+                }
+                // si es recordatorio
+                else
+                {
+                    notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => (n is Recordatorio)));
+                }
+                //notasFiltradas = new ObservableCollection<Nota>(resultado);
 
-                // como categoria es otra clase, ver ese caso a parte
-                notasFiltradas = new ObservableCollection<Nota>(resultado);
                 // Si resultado no tiene nada, mostrar las notas filtradas que hayan
                 if (!resultado.Any())
                 {
@@ -149,7 +170,7 @@ namespace NotBook_Notes.ViewModels
         }
 
 
-        //Estos de aqui son exclusivamente para el contexto de uso en papelera, porque que ladilla crear viewmodels nuevos cuando abos contienen la misma clase de objetos
+        //Estos de aqui son exclusivamente para el contexto de uso en papelera, porque que es tedioso crear viewmodels nuevos cuando abos contienen la misma clase de objetos
         public ICommand EliminarNotaCommand => new Command<Nota>(EliminarNota);
         public ICommand RestaurarNotaCommand => new Command<Nota>(RestaurarNota);
 

@@ -28,7 +28,10 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
                     TextChanged="textoBusqueda_TextChanged"
-                    x:Name="textoBusqueda"/>
+                    x:Name="textoBusqueda"
+                    AutomationId="Nota"
+                    WidthRequest="290"/>
+                    </HorizontalStackLayout>
 
             </Frame>
 
@@ -60,16 +63,16 @@
                    Margin="10,10,0,0" />     
 
                     <!-- ImageButton a la derecha -->
-                    <ImageButton 
+                <ImageButton 
                     Source="ordenar.svg"
-                    HeightRequest="30"
-                    WidthRequest="30"
-                    CornerRadius="100"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    CornerRadius="50"
                     Margin="10,10,10,0" 
+                    Padding="5"
                     VerticalOptions="Center" 
-                    HorizontalOptions="End"
-                        />  
-                </FlexLayout>
+                    HorizontalOptions="End"/>
+            </FlexLayout>
         <Label 
                 Text="¡Ups! Parece que no encontramos lo que buscabas..."
                 Margin="20,0,10,0" 

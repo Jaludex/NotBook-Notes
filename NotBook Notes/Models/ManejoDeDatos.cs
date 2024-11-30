@@ -150,9 +150,9 @@ namespace NotBook_Notes.Models
         public string nombreUsuarioModelo;
     }
 
-    public static bool FiltrarNotas(string aBuscar)
+    public static bool Filtrar(string aBuscar, string NotaORecordatorio)
     {
-            var resultado = ManejoDeDatos.notaViewModel.FiltrarNotas(aBuscar);
+            var resultado = ManejoDeDatos.notaViewModel.Filtrar(aBuscar,NotaORecordatorio);
             return resultado;
     }
     }
