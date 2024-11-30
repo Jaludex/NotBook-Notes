@@ -16,7 +16,7 @@ namespace NotBook_Notes.Models
             {
                 NotificationId = ManejoDeDatos.cantidadNotificaciones,
                 Title = recordatorio.Titulo,
-                Description = $"¡Oye {ManejoDeDatos.nombreUsuario}! {Environment.NewLine}" + (recordatorio.Categoria),
+                Description = $"¡Oye {ManejoDeDatos.nombreUsuario}! {Environment.NewLine}" + (string.IsNullOrEmpty(recordatorio.Contenido) ? "Recuerda: " + recordatorio.Contenido : "Ya se acabo el tiempo que estableciste, " + ManejoDeDatos.nombreUsuario),
                 ReturningData = recordatorio.Titulo,
                 Schedule =
                 {
@@ -45,7 +45,7 @@ namespace NotBook_Notes.Models
                 {
                     NotificationId = encontrado,
                     Title = nuevoRecord.Titulo,
-                    Description = $"¡Oye {ManejoDeDatos.nombreUsuario}! {Environment.NewLine}Recuerda: {nuevoRecord.Contenido}",
+                    Description = $"¡Oye {ManejoDeDatos.nombreUsuario}! {Environment.NewLine}" + (string.IsNullOrEmpty(nuevoRecord.Contenido) ? "Recuerda: " + nuevoRecord.Contenido : "Ya se acabo el tiempo que estableciste, " + ManejoDeDatos.nombreUsuario),
                     ReturningData = nuevoRecord.Titulo,
                     Schedule =
                     {

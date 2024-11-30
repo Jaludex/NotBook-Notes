@@ -99,6 +99,7 @@ public partial class VerNotas : ContentPage
                 return;
             }
 
+
             //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
             if (esEdicion)
             {
@@ -164,8 +165,8 @@ public partial class VerNotas : ContentPage
                     Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
                     ManejoDeDatos.notaViewModel.AddNota(nuevoRecordatorio);
 
-
                     ManejoNotificaciones.CrearNotificacion(nuevoRecordatorio);
+
 
                     IToast mensaje = Toast.Make("Recordatorio Creado");
                     await mensaje.Show();
