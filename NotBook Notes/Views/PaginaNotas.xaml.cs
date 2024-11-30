@@ -75,13 +75,6 @@ public partial class PaginaNotas : ContentPage
         menuPopupOrganizar = new MenuPopup();
     }
 
-
-    //Toma la coleccion que ya se filtro con los metodo anteriores, nada mas que la ordena de acuerdo al criterio
-    private void OrdenarNotas(string criterio, bool orden)
-    {
-        // Implementar la lógica para ordenar las notas
-    }
-
     private void btnCriterio_Clicked(object sender, EventArgs e)
     {
         descendente = (descendente == false);

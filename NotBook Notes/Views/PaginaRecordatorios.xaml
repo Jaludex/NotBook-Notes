@@ -52,31 +52,36 @@
             HeightRequest="100">
 
                 <!-- Label a la izquierda -->
-                <BoxView x:Name="btnFiltroCategoria" WidthRequest="40" HeightRequest="40"
-                            CornerRadius="10" BackgroundColor="White" 
-                            VerticalOptions="Center">
-                    <BoxView.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                    </BoxView.GestureRecognizers>
-                </BoxView>
+                <Frame Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource OffLightBlack}}" BorderColor="Transparent" CornerRadius="20" Margin="0">
+                    <BoxView x:Name="btnFiltroCategoria" WidthRequest="40" HeightRequest="40"
+                    CornerRadius="10" BackgroundColor="White" 
+                    VerticalOptions="Center">
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                </Frame>
 
                 <Button x:Name="btnCriterio"
-                        Text="Descendente"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
-                        WidthRequest="100"
-                        Clicked="btnCriterio_Clicked"/>
+                Text="Descendente"
+                FontAttributes="Bold"
+                FontSize="13"
+                TextColor="Wheat"
+                BackgroundColor="{StaticResource PrimaryDark}"
+                WidthRequest="100"
+                Clicked="btnCriterio_Clicked"/>
 
 
 
                 <!-- ImageButton a la derecha -->
                 <ImageButton x:Name="btnOrdenarNotas"
-                            Clicked="btnOrdenarNotas_Clicked"
-                            Source="ordenar.svg"
-                            HeightRequest="30"
-                            WidthRequest="30"
-                            CornerRadius="100"
-                            VerticalOptions="Center" 
-                            HorizontalOptions="End"
+            Clicked="btnOrdenarNotas_Clicked"
+            Source="ordenar.svg"
+            HeightRequest="30"
+            WidthRequest="30"
+            CornerRadius="100"
+            VerticalOptions="Center" 
+            HorizontalOptions="End"
                 />
             </FlexLayout>
 
