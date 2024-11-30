@@ -26,7 +26,7 @@
                            HorizontalOptions="FillAndExpand"
                            VerticalOptions="Center"
                            WidthRequest="290"
-                           TextChanged="Entry_TextChanged"/>
+                           TextChanged="textoBusqueda_TextChanged"/>
 
                     </HorizontalStackLayout>
             </Frame>

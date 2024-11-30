@@ -46,6 +46,11 @@ namespace NotBook_Notes.Views
             Close();
         }
 
+        public void paraRecordatorios()
+        {
+            Opcion3.IsVisible = true;
+        }
+
 
     }
 }

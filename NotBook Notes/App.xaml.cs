@@ -80,17 +80,23 @@ namespace NotBook_Notes
 
         private async void OnNotificationActionTapped(NotificationActionEventArgs e)
         {
+            int encontrada = ManejoDeDatos.notaViewModel.EncontrarNota(e.Request.ReturningData);
+            if (encontrada == -1)
+            {
+                return;
+            }
+            if (e.IsDismissed)
+            {
+                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[encontrada]);
+            }
             if (e.IsTapped)
             {
-                int encontrada = ManejoDeDatos.notaViewModel.EncontrarNota(e.Request.ReturningData);
-                if (encontrada == -1)
-                {
-                    return;
-                }
 
                 var verNotasPage = new VerNotas(true, encontrada);
 
                 await AppShell.Current.Navigation.PushAsync(verNotasPage); // Abre la notificacion pulsada
+
+                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[encontrada]);
                 return;
             }
 

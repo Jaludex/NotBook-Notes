@@ -98,7 +98,16 @@ public partial class PaginaNotas : ContentPage
 
             btnFiltroCategoria.Color = Colors.White;
             //Cuadro de sin filtro
-            //Llamar a filtrar sin criterio de categoria
+            if (ManejoDeDatos.Filtrar("", textoBusqueda.AutomationId))
+            {
+                noSeEncontro.IsVisible = false;
+            }
+            else
+            {
+                noSeEncontro.IsVisible = false;
+            }
+            ManejoDeDatos.OrdenarPorNombreOFecha();
+            ManejoDeDatos.notaViewModel.ActualizarNotas();
             return;
         }
         else
@@ -107,10 +116,15 @@ public partial class PaginaNotas : ContentPage
         }
 
         btnFiltroCategoria.Color = ManejoDeDatos.filtroCategoria.ColorNotas;
+        if (ManejoDeDatos.Filtrar("", textoBusqueda.AutomationId))
+        {
+            noSeEncontro.IsVisible = false;
+        }
+        else
+        {
+            noSeEncontro.IsVisible = false;
+        }
         ManejoDeDatos.OrdenarPorNombreOFecha();
         ManejoDeDatos.notaViewModel.ActualizarNotas();
-
-        //Cuadro de filtrando por X categoria
-        //Llamar a filtrar con ese criterio
     }
 }

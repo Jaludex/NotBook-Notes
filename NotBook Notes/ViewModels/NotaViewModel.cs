@@ -169,8 +169,8 @@ namespace NotBook_Notes.ViewModels
 
             // Filtrar las notas por categoría si se proporciona una
             IEnumerable<Nota> notasFiltradasPorCategoria = categoria != null
-                ? notas.Where(n => n.Categoria != null && n.Categoria.NombreCategoria == categoria.NombreCategoria)
-                : notas;
+                ? notasFiltradas.Where(n => n.Categoria != null && n.Categoria.NombreCategoria == categoria.NombreCategoria)
+                : notasFiltradas;
 
             // Seleccionar la clave de ordenación (Titulo, FechaCreacion o FechaLimite)
             Func<Nota, object>? keySelector = NombreOFecha switch

@@ -8,20 +8,28 @@ namespace NotBook_Notes.Views;
 public partial class PaginaRecordatorios : ContentPage
 {
     MenuPopup menuPopupOrganizar;
-    bool descendente;
-    Categoria? filtroCategoria;
+
     public PaginaRecordatorios()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         InitializeMenuPopup();
-        descendente = true;
-        filtroCategoria = null;
         BindingContext = ManejoDeDatos.notaViewModel;
+
     }
 
     private void InitializeMenuPopup()
     {
         menuPopupOrganizar = new MenuPopup();
+        menuPopupOrganizar.paraRecordatorios();
+    }
+
+    private async void BtnNuevoRecordatorio_Clicked(object sender, EventArgs e)
+    {
+        bool esRecordatorio = true;
+        var verNotasPage = new VerNotas(esRecordatorio);
+
+        await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
+
     }
 
     protected override void OnAppearing() // Este método se llama cada vez que la página está a punto de aparecer.
@@ -38,20 +46,11 @@ public partial class PaginaRecordatorios : ContentPage
         {
             noSeEncontro.IsVisible = false;
         }
+        ManejoDeDatos.OrdenarPorNombreOFecha();
         ManejoDeDatos.notaViewModel.ActualizarNotas();
     }
 
-
-
-    private async void BtnNuevoRecordatorio_Clicked(object sender, EventArgs e)
-    {
-        bool esRecordatorio = true;
-        var verNotasPage = new VerNotas(esRecordatorio);
-
-        await AppShell.Current.Navigation.PushAsync(verNotasPage); // Navegación a la nueva página
-    }
-
-    private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+    private void textoBusqueda_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (ManejoDeDatos.Filtrar(textoBusqueda.Text, textoBusqueda.AutomationId))
         {
@@ -67,46 +66,65 @@ public partial class PaginaRecordatorios : ContentPage
     private async void btnOrdenarNotas_Clicked(object sender, EventArgs e)
     {
         await PopupExtensions.ShowPopupAsync<MenuPopup>(this, menuPopupOrganizar);
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
 
         //Llama a filtrar vacio, que saliendo de aqui ya deberia de estar ordenado, o si no, pues que lo haga y quede como estaba
 
         //Hay que volverlo a construir porque el solito se destruye al mostrarse, por alguna razon
-        menuPopupOrganizar = new MenuPopup();
+        InitializeMenuPopup();
     }
 
     private void btnCriterio_Clicked(object sender, EventArgs e)
     {
-        descendente = (descendente == false);
+        ManejoDeDatos.esDescendente = (ManejoDeDatos.esDescendente == false);
 
-        if (descendente) { btnCriterio.Text = "Descendente"; }
+        if (ManejoDeDatos.esDescendente) { btnCriterio.Text = "Descendente"; }
         else { btnCriterio.Text = "Ascendente"; }
+        ManejoDeDatos.OrdenarPorNombreOFecha();
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
 
-        //Aqui llamamos a ordenar de nuevo, diciendole con la variable si se ordena desdecente o ascendente
+        //Aqui llamamos a ordenar de nuevo, diciendole con la variable si se ordena descendente o ascendente
     }
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        if (filtroCategoria == null)
+        if (ManejoDeDatos.filtroCategoria == null)
         {
-            filtroCategoria = ManejoDeDatos.categorias[0];
+            ManejoDeDatos.filtroCategoria = ManejoDeDatos.categorias[0];
         }
-        else if (filtroCategoria == ManejoDeDatos.categorias.Last())
+        else if (ManejoDeDatos.filtroCategoria == ManejoDeDatos.categorias.Last())
         {
-            filtroCategoria = null;
+            ManejoDeDatos.filtroCategoria = null;
 
             btnFiltroCategoria.Color = Colors.White;
             //Cuadro de sin filtro
-            //Llamar a filtrar sin criterio de categoria
+            if (ManejoDeDatos.Filtrar("", textoBusqueda.AutomationId))
+            {
+                noSeEncontro.IsVisible = false;
+            }
+            else
+            {
+                noSeEncontro.IsVisible = false;
+            }
+            ManejoDeDatos.OrdenarPorNombreOFecha();
+            ManejoDeDatos.notaViewModel.ActualizarNotas();
             return;
         }
         else
         {
-            filtroCategoria = ManejoDeDatos.categorias[ManejoDeDatos.categorias.IndexOf(filtroCategoria) + 1];
+            ManejoDeDatos.filtroCategoria = ManejoDeDatos.categorias[ManejoDeDatos.categorias.IndexOf(ManejoDeDatos.filtroCategoria) + 1];
         }
 
-        btnFiltroCategoria.Color = filtroCategoria.ColorNotas;
-
-        //Cuadro de filtrando por X categoria
-        //Llamar a filtrar con ese criterio
+        btnFiltroCategoria.Color = ManejoDeDatos.filtroCategoria.ColorNotas;
+        if (ManejoDeDatos.Filtrar("", textoBusqueda.AutomationId))
+        {
+            noSeEncontro.IsVisible = false;
+        }
+        else
+        {
+            noSeEncontro.IsVisible = false;
+        }
+        ManejoDeDatos.OrdenarPorNombreOFecha();
+        ManejoDeDatos.notaViewModel.ActualizarNotas();
     }
 }
