@@ -82,64 +82,73 @@ namespace NotBook_Notes.ViewModels
        
         public bool Filtrar(string criterioBusqueda, string NotaORecordatorio)
         {
-            // Esto verifica si el buscador esta vacio, si lo esta ejecuta esto:
-            if (string.IsNullOrEmpty(criterioBusqueda))
+            try
             {
-                // Ahora verifica si estamos pidiendo notas, si es asi muestra todas las notas existentes asignandolas a la coleccion de notas filtradas
-                if(NotaORecordatorio == "Nota")
+                // Esto verifica si el buscador esta vacio, si lo esta ejecuta esto:
+                if (string.IsNullOrEmpty(criterioBusqueda))
                 {
-                    notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => !(n is Recordatorio))); // Filtra solo las notas que no son de tipo Recordatorio;
+                    // Ahora verifica si estamos pidiendo notas, si es asi muestra todas las notas existentes asignandolas a la coleccion de notas filtradas
+                    if (NotaORecordatorio == "Nota")
+                    {
+                        notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => !(n is Recordatorio))); // Filtra solo las notas que no son de tipo Recordatorio;
+                    }
+                    else
+                    // Si pedimos recordatorio entonces ve si hay algun recordatorio en notas y lo asigna a notas filtradas
+                    {
+                        notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => n is Recordatorio));
+                    }
+
+                    if (notasFiltradas.Any())
+                    {
+                        return false;
+
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
                 else
-                // Si pedimos recordatorio entonces ve si hay algun recordatorio en notas y lo asigna a notas filtradas
                 {
-                    notasFiltradas = new ObservableCollection<Nota>(notas.Where(n => n is Recordatorio));
-                }
+                    // Si hay algo escrito en el criterio de búsqueda, compara y muestra las coincidencias
+                    // Ver si la búsqueda coincide con alguno de los datos de la nota (título, contenido o categoría)
 
-                if (notasFiltradas.Any())
-                {
-                    return false;
+                    var resultado = new ObservableCollection<Nota>(
+                        notas.Where(n =>
+                            n.Titulo.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                            n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                            n.Categoria.NombreCategoria.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
+                    );
+                    // si es nota entonces filtra nada mas las notas
+                    if (NotaORecordatorio == "Nota")
+                    {
+                        notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => !(n is Recordatorio)));
+                    }
+                    // si es recordatorio
+                    else
+                    {
+                        notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => (n is Recordatorio)));
+                    }
+                    //notasFiltradas = new ObservableCollection<Nota>(resultado);
 
-                } else
-                {
-                    return true;
+                    // Si resultado no tiene nada, mostrar las notas filtradas que hayan
+                    if (!resultado.Any())
+                    {
+                        return true;
+
+                    }
+                    else
+                    {
+                        // Luego ver como hacer que el label diga que no hay coincidencia en PaginaNotas.xaml
+                        return false;
+                    };
+
                 }
             }
-            else
+            catch (Exception ex)
             {
-                // Si hay algo escrito en el criterio de búsqueda, compara y muestra las coincidencias
-                // Ver si la búsqueda coincide con alguno de los datos de la nota (título, contenido o categoría)
-
-                var resultado = new ObservableCollection<Nota>(
-                    notas.Where(n =>
-                        n.Titulo.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
-                        n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
-                        n.Categoria.NombreCategoria.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
-                );
-                // si es nota entonces filtra nada mas las notas
-                if(NotaORecordatorio == "Nota")
-                {
-                    notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => !(n is Recordatorio)));
-                }
-                // si es recordatorio
-                else
-                {
-                    notasFiltradas = new ObservableCollection<Nota>(resultado.Where(n => (n is Recordatorio)));
-                }
-                //notasFiltradas = new ObservableCollection<Nota>(resultado);
-
-                // Si resultado no tiene nada, mostrar las notas filtradas que hayan
-                if (!resultado.Any())
-                {
-                    return true;
-                    
-                }
-                else
-                {
-                    // Luego ver como hacer que el label diga que no hay coincidencia en PaginaNotas.xaml
-                    return false;
-                };
-               
+                Console.WriteLine(ex.ToString() + "pene");
+                return true;
             }
         }
 

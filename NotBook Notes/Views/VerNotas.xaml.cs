@@ -99,6 +99,11 @@ public partial class VerNotas : ContentPage
                 return;
             }
 
+            if (TxtNota.Text == null)
+            {
+                TxtNota.Text = "";
+            }
+
             //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
             if (esEdicion)
             {
