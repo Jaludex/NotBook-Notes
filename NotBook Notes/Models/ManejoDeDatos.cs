@@ -140,21 +140,30 @@ namespace NotBook_Notes.Models
         }
     
 
-    //Aqui puedo dejar a la clase plantilla para recibir de los json
-    public class PlantillaDatosJson
-    {
-        public List<Nota> notasModelo;
-        public List<Recordatorio> recordatoriosModelo;
-        public List<Categoria> categoriasModelo;
-        public List<string> frasesBonitasModelo;
-        public string nombreUsuarioModelo;
-    }
+        //Aqui puedo dejar a la clase plantilla para recibir de los json
+        public class PlantillaDatosJson
+        {
+            public List<Nota> notasModelo;
+            public List<Recordatorio> recordatoriosModelo;
+            public List<Categoria> categoriasModelo;
+            public List<string> frasesBonitasModelo;
+            public string nombreUsuarioModelo;
+        }
 
-    public static bool FiltrarNotas(string aBuscar)
-    {
-            var resultado = ManejoDeDatos.notaViewModel.FiltrarNotas(aBuscar);
-            return resultado;
-    }
+        public static bool FiltrarNotas(string aBuscar)
+        {
+                var resultado = notaViewModel.FiltrarNotas(aBuscar);
+                return resultado;
+        }
+
+        public static bool SwitchBooleano(bool variable)
+        {
+            if (variable)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
 }

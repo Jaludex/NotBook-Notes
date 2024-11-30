@@ -28,7 +28,9 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center"
                     TextChanged="textoBusqueda_TextChanged"
-                    x:Name="textoBusqueda"/>
+                    x:Name="textoBusqueda"
+                        WidthRequest="270"/>
+                </HorizontalStackLayout>
 
             </Frame>
 
@@ -49,27 +51,40 @@
        
         <FlexLayout 
                     Direction="Row" 
-                    JustifyContent="SpaceBetween" 
+                    JustifyContent="SpaceEvenly" 
                     AlignItems="Center" 
                     Padding="10"
                     HeightRequest="100">
 
                     <!-- Label a la izquierda -->
-                    <Label Text="Notas Guardadas" 
-                   FontSize="24" 
-                   Margin="10,10,0,0" />     
+                <BoxView x:Name="btnFiltroCategoria" WidthRequest="40" HeightRequest="40"
+                         CornerRadius="10" BackgroundColor="White" 
+                        VerticalOptions="Center">
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </BoxView.GestureRecognizers>
+                </BoxView>
 
-                    <!-- ImageButton a la derecha -->
-                    <ImageButton 
+                <Button x:Name="btnCriterio"
+                        Text="Descendente"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
+                        WidthRequest="100"
+                        Clicked="btnCriterio_Clicked"/>
+
+
+
+                <!-- ImageButton a la derecha -->
+                    <ImageButton x:Name="btnOrdenarNotas"
+                    Clicked="btnOrdenarNotas_Clicked"
                     Source="ordenar.svg"
                     HeightRequest="30"
                     WidthRequest="30"
                     CornerRadius="100"
-                    Margin="10,10,10,0" 
                     VerticalOptions="Center" 
                     HorizontalOptions="End"
                         />  
-                </FlexLayout>
+        </FlexLayout>
+        
         <Label 
                 Text="¡Ups! Parece que no encontramos lo que buscabas..."
                 Margin="20,0,10,0" 

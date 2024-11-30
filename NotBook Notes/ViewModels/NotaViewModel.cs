@@ -82,6 +82,7 @@ namespace NotBook_Notes.ViewModels
        
         public bool FiltrarNotas(string criterioBusqueda)
         {
+            Console.WriteLine("Paso1");
             if (string.IsNullOrEmpty(criterioBusqueda))
             {
                 // Si no hay nada escrito en el criterio de búsqueda muestra todas las notas existentes
@@ -94,27 +95,30 @@ namespace NotBook_Notes.ViewModels
                     return true;
                 }
             }
+
             else
             {
                 // Si hay algo escrito en el criterio de búsqueda, compara y muestra las coincidencias
                 // Ver si la búsqueda coincide con alguno de los datos de la nota (título, contenido o categoría)
-
+                Console.WriteLine("Paso2");
                 var resultado = new ObservableCollection<Nota>(
                     notas.Where(n =>
                         n.Titulo.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
                         n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
                 );
 
-                // como categoria es otra clase, ver ese caso a parte
-                notasFiltradas = new ObservableCollection<Nota>(resultado);
+                Console.WriteLine("Paso3");
+
                 // Si resultado no tiene nada, mostrar las notas filtradas que hayan
-                if (!resultado.Any())
+                Console.WriteLine("Paso4");
+                if (resultado == null || !resultado.Any())
                 {
                     return true;
                     
                 }
                 else
                 {
+                    notasFiltradas = new ObservableCollection<Nota>(resultado);
                     // Luego ver como hacer que el label diga que no hay coincidencia en PaginaNotas.xaml
                     return false;
                 };

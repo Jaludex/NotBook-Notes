@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="NotBook_Notes.Views.MenuPopup">
+
+    <StackLayout Padding="10" WidthRequest="300" BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource OffBlack}}"  >
+        <Label Text="Selecciona una opción:" FontAttributes="Bold" />
+
+        <Button Text="Ordenar por Nombre" Clicked="OnOrdenarPorNombreClicked" BackgroundColor="Transparent"  TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+        <Button Text="Ordenar por Fecha de Edicion" Clicked="OnOrdenarPorFechaClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+        <Button Text="Ordenar por Fecha Limite" IsVisible="False" Clicked="OnOrdenarPorFechaClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+
+        <Button Text="Cancelar" Clicked="OnCloseClicked" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}"/>
+    </StackLayout>
+</toolkit:Popup>

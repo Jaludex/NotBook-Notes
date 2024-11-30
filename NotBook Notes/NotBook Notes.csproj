@@ -101,6 +101,9 @@
 	  <MauiXaml Update="Views\Papelera.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\popup\PopupOrganizar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\VerNotas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
