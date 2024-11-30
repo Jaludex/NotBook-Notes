@@ -102,8 +102,17 @@ public partial class VerNotas : ContentPage
             //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
             if (esEdicion)
             {
+                if (ManejoDeDatos.notaViewModel.notas[aEditar].Titulo != TituloEditor.Text && ManejoDeDatos.notaViewModel.EncontrarNota(TituloEditor.Text) != -1)
+                {
+                    IToast mensaje1 = Toast.Make("Introduzca un titulo no repetido");
+                    await mensaje1.Show();
+                    return;
+                }
+
                 if (!esRecordatorio)
                 {
+                    
+
                     Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, categoriaObjetivo);
                     ManejoDeDatos.notaViewModel.notas[aEditar] = nuevaNota;
                     ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
@@ -114,6 +123,7 @@ public partial class VerNotas : ContentPage
                 }
                 else if (fechaLimite.HasValue)
                 {
+
                     Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
                     ManejoDeDatos.notaViewModel.notas[aEditar] = nuevoRecordatorio;
                     ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
@@ -132,6 +142,13 @@ public partial class VerNotas : ContentPage
             //Es de creacion
             else
             {
+                if (ManejoDeDatos.notaViewModel.EncontrarNota(TituloEditor.Text) != -1)
+                {
+                    IToast mensaje1 = Toast.Make("Introduzca un titulo valido y no repetido");
+                    await mensaje1.Show();
+                    return;
+                }
+
                 if (!esRecordatorio)
                 {
                     //Creamos una nota comun

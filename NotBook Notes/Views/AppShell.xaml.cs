@@ -12,19 +12,6 @@ namespace NotBook_Notes.Views
         {
             InitializeComponent();
             RegistrarRutas();
-
-            var notification = new NotificationRequest
-            {
-                NotificationId = 100,
-                Title = "Gotica",
-                Description = "Gotica culona",
-                ReturningData = "culote", // Returning data when tapped on notification.
-                Schedule =
-                    {
-                        NotifyTime = DateTime.Now.AddSeconds(30) // This is Used for Scheduling local notifications; if not specified, the notification will show immediately.
-                    }
-            };
-            LocalNotificationCenter.Current.Show(notification);
         }
 
         //Actualizar aca cada nueva ventana que se cree
