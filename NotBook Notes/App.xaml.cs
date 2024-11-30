@@ -1,4 +1,7 @@
 ﻿using NotBook_Notes.Models;
+using NotBook_Notes.Views;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.EventArgs;
 
 namespace NotBook_Notes
 {
@@ -7,6 +10,7 @@ namespace NotBook_Notes
         public App()
         {
             InitializeComponent();
+            LocalNotificationCenter.Current.NotificationActionTapped += OnNotificationActionTapped;
             Current!.MainPage = new Views.AppShell();
         }
 
@@ -46,6 +50,24 @@ namespace NotBook_Notes
         {
             base.OnStart();
             _ = RequestPermissions();
+        }
+
+        private async void OnNotificationActionTapped(NotificationActionEventArgs e)
+        {
+            if (e.IsTapped)
+            {
+                int encontrada = ManejoDeDatos.notaViewModel.EncontrarNota(e.Request.ReturningData);
+                if (encontrada == -1)
+                {
+                    return;
+                }
+
+                var verNotasPage = new VerNotas(true, encontrada);
+
+                await AppShell.Current.Navigation.PushAsync(verNotasPage); // Abre la notificacion pulsada
+                return;
+            }
+
         }
     }
 }
