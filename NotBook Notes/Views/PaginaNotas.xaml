@@ -52,27 +52,40 @@
        
         <FlexLayout 
                     Direction="Row" 
-                    JustifyContent="SpaceBetween" 
+                    JustifyContent="SpaceEvenly" 
                     AlignItems="Center" 
                     Padding="10"
                     HeightRequest="100">
 
                     <!-- Label a la izquierda -->
-                    <Label Text="Notas Guardadas" 
-                   FontSize="24" 
-                   Margin="10,10,0,0" />     
+                <BoxView x:Name="btnFiltroCategoria" WidthRequest="40" HeightRequest="40"
+                         CornerRadius="10" BackgroundColor="White" 
+                        VerticalOptions="Center">
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </BoxView.GestureRecognizers>
+                </BoxView>
 
-                    <!-- ImageButton a la derecha -->
-                <ImageButton 
+                <Button x:Name="btnCriterio"
+                        Text="Descendente"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={DynamicResource White}}"
+                        WidthRequest="100"
+                        Clicked="btnCriterio_Clicked"/>
+
+
+
+                <!-- ImageButton a la derecha -->
+                    <ImageButton x:Name="btnOrdenarNotas"
+                    Clicked="btnOrdenarNotas_Clicked"
                     Source="ordenar.svg"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    CornerRadius="50"
-                    Margin="10,10,10,0" 
-                    Padding="5"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    CornerRadius="100"
                     VerticalOptions="Center" 
-                    HorizontalOptions="End"/>
-            </FlexLayout>
+                    HorizontalOptions="End"
+                        />  
+        </FlexLayout>
+        
         <Label 
                 Text="¡Ups! Parece que no encontramos lo que buscabas..."
                 Margin="20,0,10,0" 
@@ -115,9 +128,3 @@
 </ContentPage>
 
 
-<!--<Label Text="{Binding Titulo}" FontSize="24"/>
-<Label Text="{Binding Contenido}" FontSize="24"/>
-<Label Text="{Binding Categoria}" FontSize="24"/>
-<Label Text="{Binding FechaCreacion}" FontSize="24"/>
-<Button Text="Un botón que hará algo luego"
-                         Command="{Binding Command}" />-->
