@@ -14,6 +14,7 @@ namespace NotBook_Notes.Models
         private DateTime _fechaCreacion;
         private Categoria _categoria;
 
+
         // Propiedad Titulo con notificación de cambios
         [JsonProperty("titulo")]
         public string Titulo

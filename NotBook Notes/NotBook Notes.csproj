@@ -56,11 +56,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Backup\**" />
 	  <AndroidResource Remove="NewFolder1\**" />
+	  <Compile Remove="Backup\**" />
 	  <Compile Remove="NewFolder1\**" />
+	  <EmbeddedResource Remove="Backup\**" />
 	  <EmbeddedResource Remove="NewFolder1\**" />
+	  <MauiCss Remove="Backup\**" />
 	  <MauiCss Remove="NewFolder1\**" />
+	  <MauiXaml Remove="Backup\**" />
 	  <MauiXaml Remove="NewFolder1\**" />
+	  <None Remove="Backup\**" />
 	  <None Remove="NewFolder1\**" />
 	</ItemGroup>
 
@@ -95,10 +101,6 @@
 	  <MauiXaml Update="Views\VerNotas.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Backup\" />
 	</ItemGroup>
 
 </Project>

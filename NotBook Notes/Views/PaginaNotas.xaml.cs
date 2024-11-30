@@ -2,6 +2,7 @@ namespace NotBook_Notes.Views;
 
 using NotBook_Notes.Models;
 using NotBook_Notes.ViewModels;
+using System.Collections.ObjectModel;
 
 public partial class PaginaNotas : ContentPage
 {
@@ -28,6 +29,27 @@ public partial class PaginaNotas : ContentPage
         Console.WriteLine("NotasPage se está apareciendo."); // Esto debería aparecer en la consola
         string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
         ManejoDeDatos.GuardarDatosJSONAsync(ruta);
+        // esto es para que aparezcan todas las notas apenas abrimos la app
+        if (ManejoDeDatos.FiltrarNotas(""))
+        {
+            noSeEncontro.IsVisible = false;
+        }
+        else
+        {
+            noSeEncontro.IsVisible = true;
+        }
         ManejoDeDatos.notaViewModel.ActualizarNotas();
+    }
+
+    private void textoBusqueda_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (ManejoDeDatos.FiltrarNotas(textoBusqueda.Text))
+        {
+            noSeEncontro.IsVisible = true;
+            //solo queremos mostrar los elementos coincidentes
+        } else
+        {
+            noSeEncontro.IsVisible = false;
+        }
     }
 }

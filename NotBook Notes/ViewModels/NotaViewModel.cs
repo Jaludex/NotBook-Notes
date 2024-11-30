@@ -17,7 +17,18 @@ namespace NotBook_Notes.ViewModels
     public class NotaViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Nota> _notas { get; set; }
-        public ObservableCollection<Nota> notasFiltradas { get; set; }
+        public ObservableCollection<Nota> _notasFiltradas { get; set; }
+
+        // Con esto vemos si cambiaron las propiedades de dichos atributos
+        public ObservableCollection<Nota> notasFiltradas
+        {
+            get => _notasFiltradas;
+            set
+            {
+                _notasFiltradas = value;
+                OnPropertyChanged(); 
+            }
+        }
 
         public ObservableCollection<Nota> notas
         {
@@ -62,8 +73,53 @@ namespace NotBook_Notes.ViewModels
                     return i;
                 }
             }
-
             return -1;
+        }
+
+
+        // Esto es para filtrar las notas según lo que se escriba en la barra de busqueda
+        // retorna false cuando no hay notas que coincidan con la busqueda
+       
+        public bool FiltrarNotas(string criterioBusqueda)
+        {
+            if (string.IsNullOrEmpty(criterioBusqueda))
+            {
+                // Si no hay nada escrito en el criterio de búsqueda muestra todas las notas existentes
+                notasFiltradas = notas;
+                if (notasFiltradas.Any())
+                {
+                    return false;
+                } else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                // Si hay algo escrito en el criterio de búsqueda, compara y muestra las coincidencias
+                // Ver si la búsqueda coincide con alguno de los datos de la nota (título, contenido o categoría)
+
+                var resultado = new ObservableCollection<Nota>(
+                    notas.Where(n =>
+                        n.Titulo.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                        n.Contenido.Contains(criterioBusqueda, StringComparison.OrdinalIgnoreCase))
+                );
+
+                // como categoria es otra clase, ver ese caso a parte
+                notasFiltradas = new ObservableCollection<Nota>(resultado);
+                // Si resultado no tiene nada, mostrar las notas filtradas que hayan
+                if (!resultado.Any())
+                {
+                    return true;
+                    
+                }
+                else
+                {
+                    // Luego ver como hacer que el label diga que no hay coincidencia en PaginaNotas.xaml
+                    return false;
+                };
+               
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -89,7 +145,7 @@ namespace NotBook_Notes.ViewModels
 
         public void ActualizarNotas()
         {
-            OnPropertyChanged(nameof(notas));
+            OnPropertyChanged(nameof(notasFiltradas));
         }
 
 

@@ -104,7 +104,7 @@ namespace NotBook_Notes.Models
 
                 // Guardar el JSON en el archivo
                 await File.WriteAllTextAsync(ruta, json);
-                Console.WriteLine(ruta + "pito");
+                Console.WriteLine(ruta + "ruta");
 
 
             }
@@ -139,7 +139,7 @@ namespace NotBook_Notes.Models
 
             return path;
         }
-    }
+    
 
     //Aqui puedo dejar a la clase plantilla para recibir de los json
     public class PlantillaDatosJson
@@ -150,4 +150,12 @@ namespace NotBook_Notes.Models
         public List<string> frasesBonitasModelo;
         public string nombreUsuarioModelo;
     }
+
+    public static bool FiltrarNotas(string aBuscar)
+    {
+            var resultado = ManejoDeDatos.notaViewModel.FiltrarNotas(aBuscar);
+            return resultado;
+    }
+    }
+
 }
