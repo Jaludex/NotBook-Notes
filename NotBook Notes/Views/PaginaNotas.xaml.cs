@@ -101,7 +101,8 @@ public partial class PaginaNotas : ContentPage
         else if (filtroCategoria == ManejoDeDatos.categorias.Last())
         {
             filtroCategoria = null;
-            btnFiltroCategoria.Color = Colors.White;
+
+            btnFiltroCategoria.Color = Colors.Transparent;
             //Cuadro de sin filtro
             //Llamar a filtrar sin criterio de categoria
             return;

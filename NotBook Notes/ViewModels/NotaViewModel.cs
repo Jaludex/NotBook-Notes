@@ -66,11 +66,11 @@ namespace NotBook_Notes.ViewModels
             if (notas == null || notas.Count == 0)
             { return -1; }
 
-            for (int i = 0; i < titulo.Length; i++)
+            foreach (var nota in notas)
             {
-                if (notas[i].Titulo == titulo)
+                if (nota.Titulo == titulo)
                 {
-                    return i;
+                    return notas.IndexOf(nota);
                 }
             }
             return -1;
@@ -198,10 +198,11 @@ namespace NotBook_Notes.ViewModels
         {
             if (notaSeleccionada != null)
             {
-                // Aquí puedes implementar la lógica para restaurar la nota
-                // Por ejemplo, agregarla a la lista de notas activas
-                notas.Remove(notaSeleccionada); // Eliminar de la papelera
-                                                // Agregar a la colección de notas activos si tienes uno
+                if (notaSeleccionada is Recordatorio record)
+                {
+                    if (record.fechaLimite > DateTime.Now) { ManejoNotificaciones.CrearNotificacion(record); }
+                }
+                notas.Remove(notaSeleccionada);
                 ManejoDeDatos.notaViewModel.AddNota(notaSeleccionada); // Ajusta según tu lógica
                 string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
                 ManejoDeDatos.GuardarDatosJSONAsync(ruta);

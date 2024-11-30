@@ -107,6 +107,13 @@ public partial class VerNotas : ContentPage
             //Si se esta editando, darle la nueva nota a la referencia que se obtuvo, si no, crearla nueva
             if (esEdicion)
             {
+                if (ManejoDeDatos.notaViewModel.notas[aEditar].Titulo != TituloEditor.Text && ManejoDeDatos.notaViewModel.EncontrarNota(TituloEditor.Text) != -1)
+                {
+                    IToast mensaje1 = Toast.Make("Introduzca un titulo no repetido");
+                    await mensaje1.Show();
+                    return;
+                }
+
                 if (!esRecordatorio)
                 {
                     Nota nuevaNota = new Nota(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, categoriaObjetivo);
@@ -119,11 +126,14 @@ public partial class VerNotas : ContentPage
                 }
                 else if (fechaLimite.HasValue)
                 {
+
                     Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion, fechaLimite.Value, categoriaObjetivo);
+
+                    ManejoNotificaciones.EditarNotificacion(ManejoDeDatos.notaViewModel.notas[aEditar] as Recordatorio, nuevoRecordatorio);
+
                     ManejoDeDatos.notaViewModel.notas[aEditar] = nuevoRecordatorio;
                     ManejoDeDatos.notaViewModel.notas[aEditar].FechaCreacion = DateTime.Now;
 
-                    //Aqui llamamos a quitar la notificacion anterior y colocar la que tiene la nueva fecha limite
                     IToast mensaje = Toast.Make("Recordatorio Guardado");
                     await mensaje.Show();
                 }
@@ -137,6 +147,13 @@ public partial class VerNotas : ContentPage
             //Es de creacion
             else
             {
+                if (ManejoDeDatos.notaViewModel.EncontrarNota(TituloEditor.Text) != -1)
+                {
+                    IToast mensaje1 = Toast.Make("Introduzca un titulo valido y no repetido");
+                    await mensaje1.Show();
+                    return;
+                }
+
                 if (!esRecordatorio)
                 {
                     //Creamos una nota comun
@@ -151,7 +168,10 @@ public partial class VerNotas : ContentPage
                     //Creamos un recordatorio
                     Recordatorio nuevoRecordatorio = new Recordatorio(TituloEditor.Text, TxtNota.Text, DateTime.Now, fechaLimite.Value, categoriaObjetivo);
                     ManejoDeDatos.notaViewModel.AddNota(nuevoRecordatorio);
-                    //llamamos a establecer la notificion correspondiente
+
+                    ManejoNotificaciones.CrearNotificacion(nuevoRecordatorio);
+
+
                     IToast mensaje = Toast.Make("Recordatorio Creado");
                     await mensaje.Show();
                     await Navigation.PopAsync();
@@ -179,6 +199,11 @@ public partial class VerNotas : ContentPage
             bool answer = await DisplayAlert("¿Estas Seguro?", "¿Quieres Borrar este elemento?", "Borrar", "Cancelar");
             if (answer)
             {
+                if (ManejoDeDatos.notaViewModel.notas[aEditar] is Recordatorio record)
+                {
+                    ManejoNotificaciones.BorrarNotificacion(record);
+                }
+
                 ManejoDeDatos.papeleraViewModel.notas.Add(ManejoDeDatos.notaViewModel.notas[aEditar]);
                 ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[aEditar]);
                 string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
