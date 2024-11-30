@@ -5,6 +5,10 @@
              Title="Notas Borradas Recientemente">
     <ScrollView>
         <VerticalStackLayout>
+
+            <Label Text="¡Cuanto Vacio! Aqui apareceran las notas que descartes, las puedes rescatar antes de que desaparezcan para siempre" IsVisible="False" x:Name="labelVacio"
+                   Margin="30" text/>
+
             <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="NotaCollectionView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

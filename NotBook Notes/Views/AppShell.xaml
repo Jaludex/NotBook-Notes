@@ -54,7 +54,7 @@
     </FlyoutItem>
 
     <Shell.FlyoutFooter>
-        <Label Text="Hecho con &lt;?3 y mucha cafeina"
+        <Label Text="Hecho con &lt;3 y mucha cafeina"
                HorizontalOptions="Center"
                FontSize="15"/>
     </Shell.FlyoutFooter>

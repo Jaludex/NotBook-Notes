@@ -23,4 +23,11 @@ public partial class Papelera : ContentPage
         string ruta = Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json");
         ManejoDeDatos.GuardarDatosJSONAsync(ruta);
     }
+
+    protected override void OnAppearing() // Este método se llama cada vez que la página está a punto de aparecer.
+    {
+        base.OnAppearing();
+		if (ManejoDeDatos.papeleraViewModel.notas.Count == 0) { labelVacio.IsVisible = true; }
+		else { labelVacio.IsVisible = false; }
+    }
 }
