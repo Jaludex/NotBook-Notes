@@ -5,6 +5,7 @@ using NotBook_Notes.Models;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Compatibility;
+using Plugin.LocalNotification;
 
 namespace NotBook_Notes
 {
@@ -18,6 +19,7 @@ namespace NotBook_Notes
                 // Initialize the .NET MAUI Community Toolkit by adding the below line of code
                 .UseMauiCommunityToolkit()
                 .ConfigureNullableDateTimePicker()
+                .UseLocalNotification()
                 // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
                 .ConfigureFonts(fonts =>
                 {
