@@ -1,19 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotBook Notes", "NotBook Notes\NotBook Notes.csproj", "{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		liberar|Any CPU = liberar|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.liberar|Any CPU.ActiveCfg = liberar|Any CPU
+		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.liberar|Any CPU.Build.0 = liberar|Any CPU
+		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.liberar|Any CPU.Deploy.0 = liberar|Any CPU
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91C754A5-BBEF-4D0F-A19A-5A6D35E7BD71}.Release|Any CPU.Deploy.0 = Release|Any CPU

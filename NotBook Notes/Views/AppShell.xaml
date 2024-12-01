@@ -10,6 +10,16 @@
     Shell.TitleColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
     Title="NotBook_Notes">
 
+    <Shell.TabBarBackgroundColor>
+        <Color>#1f71f8</Color>
+    </Shell.TabBarBackgroundColor>
+    <Shell.TabBarTitleColor>
+        <Color>#ffffff</Color>
+    </Shell.TabBarTitleColor>
+    <Shell.TabBarForegroundColor>
+        <Color>#ffffff</Color>
+    </Shell.TabBarForegroundColor>
+
     <Shell.FlyoutHeader>
         <StackLayout>
             <Image Source="libreta.svg"
@@ -26,16 +36,15 @@
         </StackLayout>
     </Shell.FlyoutHeader>
 
-
-
-    <FlyoutItem Title="Notas" Icon="bombilla.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:PaginaNotas}" 
-                      Route="PaginaNotas"/>
-    </FlyoutItem>
-
-    <FlyoutItem Title="Recordatorios" Icon="campana.svg">
-        <ShellContent ContentTemplate="{DataTemplate local:PaginaRecordatorios}" 
-                  Route="PaginaRecordatorios"/>
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <Tab  Title="Notas" Icon="bombilla.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:PaginaNotas}" 
+              Route="PaginaNotas"/>
+        </Tab>
+        <Tab Title="Recordatorios" Icon="campana.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:PaginaRecordatorios}" 
+                 Route="PaginaRecordatorios"/>
+        </Tab>
     </FlyoutItem>
 
     <FlyoutItem Title="Papelera" Icon="papelera.svg">

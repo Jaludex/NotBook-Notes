@@ -48,6 +48,7 @@ public partial class PaginaRecordatorios : ContentPage
         }
         ManejoDeDatos.OrdenarPorNombreOFecha();
         ManejoDeDatos.notaViewModel.ActualizarNotas();
+        textoBusqueda.Placeholder = ManejoDeDatos.GetPlaceholder();
     }
 
     private void textoBusqueda_TextChanged(object sender, TextChangedEventArgs e)

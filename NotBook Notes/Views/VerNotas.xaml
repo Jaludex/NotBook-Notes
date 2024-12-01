@@ -19,7 +19,7 @@
                        HeightRequest="50"
                        HorizontalOptions="FillAndExpand"
                        HorizontalTextAlignment="Center"
-                       Placeholder="Un Titulo Interesante"
+                       Placeholder="Un Título Interesante"
                        MaxLength="30"/>
 
 

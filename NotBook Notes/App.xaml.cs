@@ -44,7 +44,7 @@ namespace NotBook_Notes
 
                 await Application.Current.MainPage.DisplayAlert("¡Todo Listo!", $"A partir de ahora, te llamaré {ManejoDeDatos.nombreUsuario}, te queda muy bien.", "¡Vamos!");
 
-                bool respuesta = await Application.Current.MainPage.DisplayAlert("Una Ultima Cosa...", $"{ManejoDeDatos.nombreUsuario}, en los dispositivos de hoy en dia, las optimizaciones de tu dispositivo puede acabar con nuestro preciado servicio de notificaciones.{System.Environment.NewLine}Para que no sufras ese problema, puedes ir a la opciones de la app y buscar un menu del estilo 'Ahorro de Bateria' y desactivarlo, o seleccionar 'Sin reestricciones'.{System.Environment.NewLine}{System.Environment.NewLine}¿Quieres ir a las configuraciones de la app ahora?", "Configuraciones", "No Importa");
+                bool respuesta = await Application.Current.MainPage.DisplayAlert("Una Ultima Cosa...", $"{ManejoDeDatos.nombreUsuario}, en los dispositivos de hoy en dia, las optimizaciones del sistema pueden acabar con nuestro preciado servicio de notificaciones.{System.Environment.NewLine}Para que no sufras ese problema, puedes ir a la opciones de la app y buscar un menu del estilo 'Ahorro de Bateria' y desactivarlo, o seleccionar 'Sin reestricciones'.{System.Environment.NewLine}{System.Environment.NewLine}¿Quieres ir a las configuraciones de la app ahora?", "Configuraciones", "No Importa");
                 if (respuesta)
                 {
                     var intent = new Intent();
@@ -52,7 +52,7 @@ namespace NotBook_Notes
                     intent.SetData(Android.Net.Uri.FromParts("package", Android.App.Application.Context.PackageName, null));
                     intent.AddFlags(ActivityFlags.NewTask);
 
-                    // Verifica si se encontro la ventana de optimizar memoria
+                    // Verifica si se encontro la ventana de optimizar bateria
                     if (intent.ResolveActivity(Android.App.Application.Context.PackageManager) != null)
                     {
                         Android.App.Application.Context.StartActivity(intent);
@@ -85,19 +85,17 @@ namespace NotBook_Notes
             {
                 return;
             }
-            if (e.IsDismissed)
-            {
-                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[encontrada]);
-            }
             if (e.IsTapped)
             {
 
                 var verNotasPage = new VerNotas(true, encontrada);
 
                 await AppShell.Current.Navigation.PushAsync(verNotasPage); // Abre la notificacion pulsada
-
-                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[encontrada]);
                 return;
+            }
+            if (e.IsDismissed)
+            {
+                ManejoDeDatos.notaViewModel.notas.Remove(ManejoDeDatos.notaViewModel.notas[encontrada]);
             }
 
         }

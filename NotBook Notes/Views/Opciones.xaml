@@ -6,6 +6,6 @@
     <VerticalStackLayout>
         <Button Text="Cambiar Nombre" BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnCambiarNombre" Clicked="btnCambiarNombre_Clicked"/>
         <Button Text="BORRAR TODOS LOS DATOS" BackgroundColor="Transparent" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnBorrarTodo" Clicked="btnBorrarTodo_Clicked"/>
-        <Button Text="Acerca de la Aplicacion" BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnAcercaDe" Clicked="btnAcercaDe_Clicked"/>
+        <Button Text="Acerca de la Aplicación" BackgroundColor="{AppThemeBinding Dark={StaticResource Gray950}, Light={StaticResource Gray100}}" TextColor="{AppThemeBinding Dark={StaticResource White}, Light={StaticResource Black}}" FontSize="22" x:Name="btnAcercaDe" Clicked="btnAcercaDe_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

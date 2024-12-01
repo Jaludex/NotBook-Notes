@@ -7,7 +7,7 @@
         <VerticalStackLayout>
 
             <Label Text="¡Cuanto Vacio! Aqui apareceran las notas que descartes, las puedes rescatar antes de que desaparezcan para siempre" IsVisible="False" x:Name="labelVacio"
-                   Margin="30"/>
+                   Margin="30" HorizontalTextAlignment="Center"/>
 
             <CollectionView ItemsSource="{Binding notas}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="NotaCollectionView">
                 <CollectionView.ItemTemplate>

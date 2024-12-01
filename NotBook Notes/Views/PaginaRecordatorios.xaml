@@ -44,6 +44,8 @@
             Margin="20,-9"
             Clicked="BtnNuevoRecordatorio_Clicked"/>
 
+            <Label Text="Filtro de Categoría" Margin="30,20,0,0"/>
+
             <FlexLayout 
             Direction="Row" 
             JustifyContent="SpaceEvenly" 
@@ -68,7 +70,7 @@
                 FontSize="13"
                 TextColor="Wheat"
                 BackgroundColor="{StaticResource PrimaryDark}"
-                WidthRequest="100"
+                WidthRequest="120"
                 Clicked="btnCriterio_Clicked"/>
 
 
@@ -112,7 +114,7 @@
                                     <Label Margin="20,10,20,0" Text="{Binding Titulo}" FontAttributes="Bold" FontSize="20" HorizontalOptions="FillAndExpand"/>
                                     <Label Margin="20,0,20,0" Text="{Binding FechaCreacion}" FontSize="15" HorizontalOptions="FillAndExpand"/>
                                     <Label Margin="20,0,20,0" Text="{Binding Categoria.NombreCategoria}" FontSize="15" HorizontalOptions="FillAndExpand"/>
-                                    <Label Margin="20,0,20,20" Text="{Binding Contenido}" FontSize="15" HorizontalOptions="FillAndExpand"/>
+                                    <Label Margin="20,0,20,20" Text="{Binding Contenido}" MaxLines="3" FontSize="15" HorizontalOptions="FillAndExpand"/>
                                 </StackLayout>
                             </Frame>
                         </DataTemplate>

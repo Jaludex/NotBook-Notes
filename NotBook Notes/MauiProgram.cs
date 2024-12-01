@@ -50,6 +50,20 @@ namespace NotBook_Notes
             ManejoDeDatos.categorias.Add(new Categoria("Viajes", Color.FromArgb("#FFB0E0E6"))); // Azul acero (LightSteelBlue)
             ManejoDeDatos.categorias.Add(new Categoria("Hobbies", Color.FromArgb("#FFFFA500")));
 
+            ManejoDeDatos.frasesBonitas = new List<string>
+            {
+                "{User}, ¿Dónde dejé esa nota?",
+                "¿Qué nota busca {User} hoy?",
+                "Recordando cosas importantes, ¿Verdad, {User}?",
+                "¿Por qué {User} no encuentra esto?",
+                "Buscar entre el caos de {User}...",
+                "¿Qué dijo {User} de nuevo?",
+                "¿Recuerdas esto, {User}?",
+                "¿Qué más nos trae la mente de {User}?",
+                "Buscando lo que {User} olvidó.",
+                "¡A cambiar el mundo, {User}!"
+            };
+
             ManejoDeDatos.CargarDatosJSON(Path.Combine(ManejoDeDatos.GetRutaBackups(), "backup.json"));
             return builder.Build();
         }

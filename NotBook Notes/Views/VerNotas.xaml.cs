@@ -184,9 +184,8 @@ public partial class VerNotas : ContentPage
                 }
             }
         }
-        catch (Exception ex)
+        catch
         {
-            await DisplayAlert("Error", ex.ToString(), "Volver");
             await Navigation.PopAsync();
         }
 
