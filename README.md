@@ -42,6 +42,6 @@ NotBook is being developed with the next Plugins and Frameworks:
 
 - **[.NET MAUI 8](https://github.com/dotnet/maui)**.  
 - **[Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)** 
-- **[nullableDateTimePicker](https://github.com/themoonrat/nullableDateTimePicker)**
+- **[nullableDateTimePicker](https://github.com/sebarslan/Maui.NullableDateTimePicker)**
 - **[Plugin.LocalNotification](https://github.com/thudugala/Plugin.LocalNotification)**
 - **[.NET Community Toolkit](https://github.com/CommunityToolkit/dotnet)**
