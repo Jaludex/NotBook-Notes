@@ -21,22 +21,6 @@
 
 > **Summary**: An application designed to manage your thoughts, tasks, and schedules without complications.  
 
----
-
-## 📌 Installation Requirements  
-### Requirements to build the project from source code  
-To work with this project, you need:  
-- **Visual Studio 2022** or later with support for **.NET MAUI**.  
-- **.NET SDK version 8 or later** installed on your system.  
-- Android SDK configured in Visual Studio.  
-
-### Requirements for end users  
-To use the application once compiled:  
-- An Android device with **minimum version 5.0 (Lollipop)** or later.  
-- Installation of the generated `.apk` file after compiling the project.
-
----
-
 ## ⚙️Technology and Libraries 
 NotBook is being developed with the next Plugins and Frameworks:
 
